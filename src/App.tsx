@@ -12,6 +12,9 @@ import Search from './pages/search';
 import Questions from './pages/questions';
 import Course from './pages/course';
 import Profile from './pages/profile';
+import Forget from './pages/forget';
+
+import './style.css'
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="signin" element={<Signin />} />
+            <Route path="forget" element={<Forget />} />
             <Route path="signup" element={<Signup />} />
             <Route path="search" element={<Search />} />
             <Route path="questions/:id" element={<Questions />} />

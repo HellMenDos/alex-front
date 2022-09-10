@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Input } from '../components/Input';
 
 const theme = createTheme();
 
@@ -39,50 +40,32 @@ export default function Signin() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign up
+            Войти
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
+                <Input style={{ width:"100%" }} placeholder='E-mail'/>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
+                <Input style={{ width:"100%" }} placeholder='Пароль'/>
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}
             >
-              Sign Up
+              Войти
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                <Link href="signup" variant="body2">
+                  Зарегистрироваться
+                </Link>
+                <Link href="forget" variant="body2" style={{ marginLeft: 5}}>
+                  Забыли пароль ?
                 </Link>
               </Grid>
             </Grid>

@@ -18,6 +18,7 @@ const mainFeaturedPost = {
 
 const featuredPosts = [
   {
+    id: 1,
     title: 'Featured post',
     date: 'Nov 12',
     description:
@@ -27,6 +28,7 @@ const featuredPosts = [
     
   },
   {
+    id: 2,
     title: 'Post title',
     date: 'Nov 11',
     description:

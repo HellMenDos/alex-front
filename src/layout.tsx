@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 
 const sections = [
-  { title: 'Technology', url: '#' },
+  { title: 'Technology', url: 'search' },
   { title: 'Design', url: '#' },
   { title: 'Culture', url: '#' },
   { title: 'Business', url: '#' },

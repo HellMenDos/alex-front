@@ -15,7 +15,7 @@ import { Input } from '../components/Input';
 
 const theme = createTheme();
 
-export default function Signup() {
+export default function Forget() {
 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,48 +40,29 @@ export default function Signup() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Зарегистрироваться
+            Забыли пароль ?
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <Input style={{ width:"100%" }} placeholder='Имя'/>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Input style={{ width:"100%" }} placeholder='Номер'/>
-
-              </Grid>
               <Grid item xs={12}>
                 <Input style={{ width:"100%" }} placeholder='E-mail'/>
-              </Grid>
-              <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Пароль'/>
-              </Grid>
-              <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Подтвердить пароль'/>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Я хочу получать e-mail рассылку"
-                />
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 1, mb: 1, borderRadius:'10px', background:"#0966aa" }}
+              sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}
             >
-            Зарегистрироваться
+              Отправить
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="signin" variant="body2">
-                  Войти
+                <Link href="signup" variant="body2">
+                  Зарегистрироваться
                 </Link>
-                <Link href="forget" variant="body2" style={{ marginLeft: 5}}>
-                  Забыли пароль ?
+                <Link href="signin" variant="body2" style={{ marginLeft: 5}}>
+                  Войти
                 </Link>
               </Grid>
             </Grid>

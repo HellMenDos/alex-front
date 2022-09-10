@@ -3,10 +3,13 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import FeaturedPost from '../components/FeaturedPost';
 import TextField from '@mui/material/TextField';
+import { Input } from '../components/Input';
+import { Pagination } from '@mui/material';
 
 
 const featuredPosts = [
   {
+    id:1,
     title: 'Featured post',
     date: 'Nov 12',
     description:
@@ -16,6 +19,7 @@ const featuredPosts = [
     
   },
   {
+    id:1,
     title: 'Post title',
     date: 'Nov 11',
     description:
@@ -24,6 +28,7 @@ const featuredPosts = [
     imageLabel: 'Image Text',
   },
   {
+    id:1,
     title: 'Post title',
     date: 'Nov 11',
     description:
@@ -32,6 +37,7 @@ const featuredPosts = [
     imageLabel: 'Image Text',
   },
   {
+    id:1,
     title: 'Post title',
     date: 'Nov 11',
     description:
@@ -46,17 +52,15 @@ const featuredPosts = [
 export default function Search() {
   return (
         <main>
-          <TextField 
-            placeholder='Search' 
-            label='Search' 
-            fullWidth
-            margin="normal"
-          />
-          <Grid container spacing={4}>
+          <Input style={{ width:"100%", marginTop: '10px' }} placeholder='Hello' />
+          <Grid container spacing={4} style={{ marginTop:'1px' }}>
             {featuredPosts.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>
+          <div style={{width: "max-content", margin: "30px auto"}}> 
+            <Pagination count={10} variant="outlined" />
+          </div>
         </main>
   );
 }
