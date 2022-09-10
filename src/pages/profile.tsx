@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FeaturedPost from '../components/FeaturedPost';
 import { Pagination } from '@mui/material';
 import { Input } from '../components/Input';
+import SimpleDialogDemo from '../components/Popup';
 
 const theme = createTheme();
 
@@ -88,6 +89,7 @@ export default function Profile() {
             <Typography component="h1" variant="h5" fontWeight="lighter">
               Ваши посты
             </Typography>
+            <SimpleDialogDemo />
             {featuredPosts.map((post) => (
               <FeaturedPost md={12} key={post.title} post={post} />
             ))}
