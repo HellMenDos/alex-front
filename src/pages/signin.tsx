@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Input } from '../components/Input';
+import { AuthService } from '../services/AuthService';
 
 const theme = createTheme();
 
@@ -21,9 +22,9 @@ export default function Signin() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    AuthService().signin({
+      email: data.get('email') as string,
+      password: data.get('password') as string,
     });
   };
 
@@ -45,10 +46,10 @@ export default function Signin() {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='E-mail'/>
+                <Input style={{ width:"100%" }} name="email" placeholder='E-mail'/>
               </Grid>
               <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Пароль'/>
+                <Input style={{ width:"100%" }} name="password" placeholder='Пароль'/>
               </Grid>
             </Grid>
             <Button

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Grid from '@mui/material/Grid';
-import FeaturedPost from '../components/FeaturedPost';
+import FeaturedPost from '../components/FeaturedQuestion';
 import MainFeaturedPost from '../components/MainFeaturedPost';
 import Sidebar from '../components/Sidebar';
 import Main from '../components/Main';
@@ -11,7 +11,7 @@ const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
   description:
     "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
+  image: 'https://mobimg.b-cdn.net/v3/fetch/89/89b1452e43e738be92c573fdebfb1d22.jpeg',
   imageText: 'main image description',
   linkText: 'Continue reading…',
 };
@@ -23,7 +23,7 @@ const featuredPosts = [
     date: 'Nov 12',
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
+    image: 'https://mobimg.b-cdn.net/v3/fetch/89/89b1452e43e738be92c573fdebfb1d22.jpeg',
     imageLabel: 'Image Text',
     
   },
@@ -33,7 +33,7 @@ const featuredPosts = [
     date: 'Nov 11',
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
+    image: 'https://mobimg.b-cdn.net/v3/fetch/89/89b1452e43e738be92c573fdebfb1d22.jpeg',
     imageLabel: 'Image Text',
   },
 ];
@@ -70,12 +70,12 @@ export default function Blog() {
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
+            {/* {featuredPosts.map((post) => (
+              // <FeaturedPost key={post.title} post={post} />
+            ))} */}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="From the firehose" posts={posts} />
+            {/* <Main title="From the firehose" posts={posts} /> */}
             <Sidebar
               title={sidebar.title}
               description={sidebar.description}

@@ -1,18 +1,12 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import FeaturedPost from '../components/FeaturedPost';
 import { Pagination } from '@mui/material';
+
+import FeaturedPost from '../components/FeaturedQuestion';
 import { Input } from '../components/Input';
 import SimpleDialogDemo from '../components/Popup';
 
@@ -90,9 +84,9 @@ export default function Profile() {
               Ваши посты
             </Typography>
             <SimpleDialogDemo />
-            {featuredPosts.map((post) => (
+            {/* {featuredPosts.map((post) => (
               <FeaturedPost md={12} key={post.title} post={post} />
-            ))}
+            ))} */}
             <div style={{width: "max-content", margin: "30px auto"}}> 
               <Pagination count={10} variant="outlined" />
             </div>

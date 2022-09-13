@@ -24,7 +24,10 @@ function App() {
             <Route path="signin" element={<Signin />} />
             <Route path="forget" element={<Forget />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="search" element={<Search />} />
+            <Route path="search/" element={<Search />} />
+            <Route path="search/:lang" element={<Search />} />
+            <Route path="search/:lang/:tech" element={<Search />} />
+            <Route path="search/:lang/:tech/:level" element={<Search />} />
             <Route path="questions/:id" element={<Questions />} />
             <Route path="course" element={<Course />} />
             <Route path="profile" element={<Profile />} />

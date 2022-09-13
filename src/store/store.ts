@@ -1,7 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import post from './slices/postSlice'
+import lang from './slices/langSlice'
+import tech from './slices/techSlice'
+import level from './slices/levelSlice'
+import question from './slices/questionSlice'
 
-export const rootReducer = combineReducers({ post })
+export const rootReducer = combineReducers({ lang, tech, level,question })
 
 const store = configureStore({
     reducer: rootReducer,

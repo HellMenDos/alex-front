@@ -1,65 +1,63 @@
-import * as React from 'react';
+import React, { useEffect,useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
-import FeaturedPost from '../components/FeaturedPost';
-import TextField from '@mui/material/TextField';
-import { Input } from '../components/Input';
 import { Pagination } from '@mui/material';
 
+import FeaturedQuestion from '../components/FeaturedQuestion';
+import { Input } from '../components/Input';
 
-const featuredPosts = [
-  {
-    id:1,
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-    
-  },
-  {
-    id:1,
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-  {
-    id:1,
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-  {
-    id:1,
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-];
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fetchAllQuestions } from '../store/slices/questionSlice';
+import { Question } from '../common/types';
 
 
 
 export default function Search() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const TOTAL_POST_PER_PAGE = 10
+  const TOTAL_POSTS = TOTAL_POST_PER_PAGE * Number(searchParams.get('page'))
+  const [search, setSearch] = useState<string>('')
+  const params = useParams()
+  const dispatch = useAppDispatch()
+  const questions = useAppSelector((state) => state.question.questions)
+
+  useEffect(() => {
+    console.log(searchParams.get('page'))
+    if(params.tech && params.level && params.lang) {
+      dispatch(fetchAllQuestions({ 
+        tech: params.tech,
+        level: params.level,
+        lang: params.lang
+      }))
+    }
+  }, [params])
+
+  const filterPosts = (post: Question) => post.title.includes(search as string) || post.describe.includes(search as string)
+  const setPage = (pageNumber: string) => {
+    setSearchParams({ 'page': pageNumber })
+  }
+
   return (
         <main>
-          <Input style={{ width:"100%", marginTop: '10px' }} placeholder='Hello' />
+          <Input value={search} onChange={({ target }) => setSearch(target.value)} style={{ width:"100%", marginTop: '10px' }} placeholder='Hello' />
           <Grid container spacing={4} style={{ marginTop:'1px' }}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
+            {questions
+            .filter((post) => filterPosts(post))
+            .slice(TOTAL_POSTS, TOTAL_POSTS + 10)
+            .map((post) => (
+              <FeaturedQuestion key={post.id} question={post} />
             ))}
           </Grid>
           <div style={{width: "max-content", margin: "30px auto"}}> 
-            <Pagination count={10} variant="outlined" />
+            <Pagination 
+              count={Math.ceil(questions.length/TOTAL_POST_PER_PAGE) - 1} 
+              page={Number(searchParams.get('page'))} 
+              variant="outlined" 
+              onChange={(e: any) => setPage(e.target.innerText)}
+              hidePrevButton 
+              hideNextButton
+            />
           </div>
         </main>
   );

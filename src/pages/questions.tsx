@@ -1,15 +1,14 @@
-import * as React from 'react';
+import React, { useState,useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
-import FeaturedPost from '../components/FeaturedPost';
-import MainFeaturedPost from '../components/MainFeaturedPost';
+
 import Sidebar from '../components/Sidebar';
 import Main from '../components/Main';
 
+import { QuestionService } from '../services/QuestionService';
+import { Question } from '../common/types';
 
-
-
-const posts = ['sdfsdf','sdfsdf'];
 
 const sidebar = {
   title: 'About',
@@ -37,10 +36,19 @@ const sidebar = {
 
 
 export default function Questions() {
+  const params = useParams<{ id: string }>()
+  const [question, setQuestion] = useState<Question>()
+  
+  useEffect(() => {
+    QuestionService().getOne(Number(params.id))
+    .then((data) => setQuestion(data as Question))
+  }, [])
+
+
   return (
         <main>
           <Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="From the firehose" posts={posts} />
+            {question && <Main question={question as Question} />}
             <Sidebar
               title={sidebar.title}
               description={sidebar.description}

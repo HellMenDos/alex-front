@@ -1,11 +1,13 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
+import { fetchAllLangs } from '../store/slices/langSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useParams, useLocation } from 'react-router-dom';
 
 
 interface HeaderProps {
@@ -17,7 +19,33 @@ interface HeaderProps {
 }
 
 function Header(props: HeaderProps) {
-  const { title, sections } = props;
+  const { title } = props;
+  const params = useParams()
+  const locate = useLocation()
+  
+  const sections = useAppSelector((state) => {
+    if(params.lang && !params.tech) {
+      const currentLangId = state.lang.langs.find((item) => item.title == params.lang)?.id
+      return state.tech.techs.filter((item) => item.lang == Number(currentLangId))
+    }
+    
+    if(params.tech) {
+      return state.level.levels
+    }
+
+    if(!params.lang && !params.tech) {
+      return state.lang.langs
+    }
+
+    return []
+  })
+
+  const makeHref = (title: string) => {
+    const limitCount = Object.values(params).length == 3 ? `${title}` : `${locate.pathname}/${title}`
+    return params.lang || params.tech ? limitCount : `/search/${title}`
+  }
+
+
 
   return (
     <React.Fragment>
@@ -81,9 +109,9 @@ function Header(props: HeaderProps) {
           <Link
             color="inherit"
             noWrap
-            key={section.title}
+            key={section.id}
             variant="body2"
-            href={section.url}
+            href={makeHref(section.title)}
             sx={{
                flexShrink: 0,
                background: '#1315200d',
@@ -92,7 +120,7 @@ function Header(props: HeaderProps) {
                padding:'8px 15px', 
                textDecoration:"none"}}
           >
-            {section.title}
+            {section?.title}
           </Link>
         ))}
       </Toolbar>
