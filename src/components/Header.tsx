@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import { fetchAllLangs } from '../store/slices/langSlice';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { useParams, useLocation } from 'react-router-dom';
 
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { Exit } from '../store/slices/userSlice'
+
+import { StorageService } from '../services/StorageService';
+
+import { User } from '../common/types';
 
 interface HeaderProps {
-  sections: ReadonlyArray<{
-    title: string;
-    url: string;
-  }>;
+  sections: Array<any>;
   title: string;
 }
 
@@ -22,6 +23,9 @@ function Header(props: HeaderProps) {
   const { title } = props;
   const params = useParams()
   const locate = useLocation()
+  const navigate = useNavigate()
+  const user = useAppSelector((state) => state.user.user) as User
+  const dispatch = useAppDispatch()
   
   const sections = useAppSelector((state) => {
     if(params.lang && !params.tech) {
@@ -45,6 +49,15 @@ function Header(props: HeaderProps) {
     return params.lang || params.tech ? limitCount : `/search/${title}`
   }
 
+  const exit = () => {
+    dispatch(Exit())
+    StorageService().remove('tokens')
+    navigate('/signin')
+  }
+
+  useEffect(() => {
+    console.log(user)
+  })
 
 
   return (
@@ -60,15 +73,8 @@ function Header(props: HeaderProps) {
         left: 0,
         zIndex:10
       }}>
-        <Button 
-          variant="contained" 
-          size="small"
-          sx={{
-            background: "#e75357", 
-            borderRadius: '10px', 
-            boxShadow:'none'}}
-          >
-            IT BOT
+        <Button variant="contained" size="small" sx={{ background: "#e75357",  borderRadius: '10px', boxShadow:'none'}}>
+          IT BOT
         </Button>
         <Typography
           component="h2"
@@ -82,18 +88,19 @@ function Header(props: HeaderProps) {
           <Link sx={{ textDecoration:"none", color:"white" }} href='/'>
           {title}
           </Link>
-
         </Typography>
-        <IconButton>
-        </IconButton>
-        <Button 
-          variant="contained" 
-          size="small"
-          href='/signin'
-          sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}
-        >
+
+        {user?.id ? 
+        <Button variant="contained" size="small"  href='/profile' sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}>
+          {user?.name}
+        </Button> :
+        <Button variant="contained" size="small" href='/signin' sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}>
           Войти
-        </Button>
+        </Button>}
+        {user?.id &&         
+        <Button onClick={exit} variant="contained" size="small" sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}>
+          Выйти
+        </Button>}
       </Toolbar>
       <Toolbar
         component="nav"

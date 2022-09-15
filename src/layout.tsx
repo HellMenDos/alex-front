@@ -1,12 +1,10 @@
-import { ThemeProvider } from '@emotion/react';
-import { Container, createTheme, CssBaseline } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+
+import { ThemeProvider } from '@emotion/react';
+import { Container, createTheme, CssBaseline } from '@mui/material';
+
 import Header from './components/Header';
-import { fetchAllLangs } from './store/slices/langSlice';
-import { useAppDispatch } from './store/hooks';
-import { fetchAllTechs } from './store/slices/techSlice';
-import { fetchAllLevels } from './store/slices/levelSlice';
 
 const sections = [
   { title: 'Technology', url: 'search' },
@@ -25,14 +23,6 @@ const theme = createTheme();
 
 
 function Layout() {
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(fetchAllLangs())
-    dispatch(fetchAllTechs())
-    dispatch(fetchAllLevels())
-  }, [])
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -1,31 +1,51 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Snackbar from '@mui/material/Snackbar';
+
 import { Input } from '../components/Input';
 import { AuthService } from '../services/AuthService';
+import { Alert, IconButton } from '@mui/material';
 
 const theme = createTheme();
 
 export default function Signin() {
+  const [ snack, setSnack ] = useState<boolean>(false)
+  const [ error, setError ] = useState<string>('')
+
+  const navigate = useNavigate()
 
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnack(false);
+  };
+
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    AuthService().signin({
+    const user = await AuthService().signin({
       email: data.get('email') as string,
       password: data.get('password') as string,
-    });
+    }) as { data: any, error?: string }
+
+    if(user.data) {
+      navigate('/profile')
+    }else {
+      setError(user?.error as string)
+      setSnack(true)
+    }
   };
 
   return (
@@ -43,13 +63,13 @@ export default function Signin() {
           <Typography component="h1" variant="h5">
             Войти
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Input style={{ width:"100%" }} name="email" placeholder='E-mail'/>
+                <Input style={{ width:"100%" }} type="email" required name="email" placeholder='E-mail'/>
               </Grid>
               <Grid item xs={12}>
-                <Input style={{ width:"100%" }} name="password" placeholder='Пароль'/>
+                <Input style={{ width:"100%" }} type="password" required name="password" placeholder='Пароль'/>
               </Grid>
             </Grid>
             <Button
@@ -72,6 +92,11 @@ export default function Signin() {
             </Grid>
           </Box>
         </Box>
+        <Snackbar open={snack} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );

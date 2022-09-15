@@ -1,73 +1,97 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
-import { Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Alert, Box, Grid, Snackbar } from '@mui/material';
 import { Input } from './Input';
+import { QuestionService } from '../services/QuestionService';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+import Button from '@mui/material/Button';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';;
 
-export interface SimpleDialogProps {
+
+export interface CreateDialogProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  onClose: () => void;
+  setMessage: (value: string) => void
+  setSnackError: (value: boolean) => void
+  setSnackSuccess: (value: boolean) => void
 }
 
-function SimpleDialog(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
+function CreateDialog(props: CreateDialogProps) {
+  const { onClose, open, setMessage, setSnackSuccess, setSnackError } = props;
 
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const newQuestion = await QuestionService().create(data) as { data: any, error?: string }
+    
+    if(newQuestion.data) {
+      setMessage('Вопрос создан')
+      setSnackSuccess(true)
+      setSnackError(false)
+    }else {
+      setMessage('Произашла ошибка')
+      setSnackError(true)
+      setSnackSuccess(false)
+    }
 
-  const handleListItemClick = (value: string) => {
-    onClose(value);
-  };
+    onClose()
+  }
 
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <Dialog open={open}>
         <DialogTitle>Создай вопрос</DialogTitle>
-        <Grid container spacing={2} style={{ padding: '20px'}}>
+        <Box component="form" onSubmit={handleSubmit}>
+          <Grid container spacing={2} style={{ padding: '20px'}}>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Название'/>
+                <Input style={{ width:"100%" }} placeholder='Название' name="title" />
             </Grid>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Описание'/>
+                <Input style={{ width:"100%" }} placeholder='Описание' name="describe" />
             </Grid>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} type="file" placeholder='Фото'/>
+                <Input style={{ width:"100%" }} type="file" placeholder='Фото' name="photo"/>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ borderRadius:'10px', background:"#0966aa", marginLeft:"15px",marginTop:"10px" }}
+              sx={{ 
+                borderRadius:'10px', 
+                background:"#0966aa", 
+                marginLeft:"15px",
+                marginTop:"10px" 
+              }}
             >
               Отправить
             </Button>
-        </Grid>
+          </Grid>
+        </Box>
     </Dialog>
   );
 }
 
-export default function SimpleDialogDemo() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+export default function CreateDialogPop() {
+  const [open, setOpen] = useState(false);
+  const [ snackError, setSnackError ] = useState<boolean>(false)
+  const [ snackSuccess, setSnackSuccess ] = useState<boolean>(false)
+  const [ message, setMessage ] = useState<string>('')
 
+
+  const handleCloseSnack = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackError(false);
+    setSnackSuccess(false);  
+  };
+
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (value: string) => {
+  const handleClose = () => {
     setOpen(false);
-    setSelectedValue(value);
   };
 
   return (
@@ -79,11 +103,23 @@ export default function SimpleDialogDemo() {
         onClick={handleClickOpen}>
         Создать вопрос
       </Button>
-      <SimpleDialog
-        selectedValue={selectedValue}
+      <CreateDialog
         open={open}
         onClose={handleClose}
+        setMessage={setMessage}
+        setSnackError={setSnackError}
+        setSnackSuccess={setSnackSuccess}
       />
+        <Snackbar open={snackError} autoHideDuration={6000} onClose={handleCloseSnack}>
+          <Alert onClose={handleCloseSnack} severity="error" sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
+        <Snackbar open={snackSuccess} autoHideDuration={6000} onClose={handleCloseSnack}>
+          <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
     </div>
   );
 }

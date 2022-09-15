@@ -1,14 +1,58 @@
 import axios from "axios"
-const QUESTIONS_DOMAIN = 'http://localhost:3000'
+import { StorageService } from './StorageService';
+const QUESTIONS_DOMAIN = 'http://localhost:4000'
+
 
 export function AuthService() {
     return {    
         async signin({ email, password }:{ email: string, password: string } ) {
-            return axios.post(`${QUESTIONS_DOMAIN}/users/signin`, { email, password })
+            try {
+                const response = await axios.post(`${QUESTIONS_DOMAIN}/users/signin`, { email, password })
+                StorageService().set('tokens',response.data)
+                return response
+            } catch(e: any) {
+                return {data: null, error: e.response.data.error}
+            }  
         },
         async signup({ email, password, phone, name }:{ email: string, password: string, phone: string, name: string } ) {
-            return axios.post(`${QUESTIONS_DOMAIN}/users/signup`, { email, password, phone, name })
+            try {
+                const response = await axios.post(`${QUESTIONS_DOMAIN}/users/signup`, { email, password, phone, name })
+                return response
+            } catch(e: any) {
+                return {data: null, error: e.response.data.error}
+            }  
         },
+        async forget({ email }: { email: string }) {
+            try {
+                const response = await axios.post(`${QUESTIONS_DOMAIN}/users/forget`, { email })
+                return response
+            } catch(e: any) {
+                return {data: null, error: e.response.data.error}
+            }  
+
+        },
+        async refresh() {
+            const tokens = StorageService().get('tokens')
+            if(tokens.refresh_token) {
+                try {
+                    const response = await axios.post(`${QUESTIONS_DOMAIN}/users/refresh`,{}, {
+                        headers: {
+                            Authorization: `Token ${tokens.refresh_token}`
+                        }
+                    })
+                    if(response.data?.refresh_token && response.data?.access_token) {
+                        StorageService().set('tokens',response.data)
+                    }else {
+                        StorageService().remove('tokens')
+                        window.location.href = '/'
+                    }
+                }catch(e) {
+                    StorageService().remove('tokens')
+                    window.location.href = '/'
+                }
+            }
+
+        }
     }
 }
 

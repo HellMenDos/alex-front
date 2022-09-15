@@ -29,3 +29,19 @@ export interface Question {
     tech: Tech
     level: Level
 }
+
+export interface User {
+    admin: boolean
+    email: string
+    id: number
+    name: string
+    phone: string
+    verify: boolean
+    verifyToken: string
+}
+
+export interface Comment {
+    message: string
+    date: Date
+    question: number
+}
