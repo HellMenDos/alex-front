@@ -9,8 +9,15 @@ export function CommentsService() {
                 return (await api.post(`comments`,{
                     message: data.message,
                     date: data.date,
-                    question: data.question
+                    questionId: data.questionId
                 })).data as Comment[]
+            }catch(e) {
+                console.log(e)
+            }
+        },
+        async getAll(question: number) {
+            try {
+                return (await api.get(`comments/${question}`)).data as Comment[]
             }catch(e) {
                 console.log(e)
             }

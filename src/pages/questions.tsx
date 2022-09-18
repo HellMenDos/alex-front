@@ -8,6 +8,9 @@ import Main from '../components/Main';
 
 import { QuestionService } from '../services/QuestionService';
 import { Question } from '../common/types';
+import { useAppDispatch } from '../store/hooks';
+import { fetchAllComments, fetchAllFavourite } from '../store/slices/questionSlice';
+import { FavouritesService } from '../services/FavouritesService';
 
 
 const sidebar = {
@@ -37,11 +40,15 @@ const sidebar = {
 
 export default function Questions() {
   const params = useParams<{ id: string }>()
+  const dispatch = useAppDispatch()
   const [question, setQuestion] = useState<Question>()
   
   useEffect(() => {
     QuestionService().getOne(Number(params.id))
     .then((data) => setQuestion(data as Question))
+    
+    dispatch(fetchAllComments(Number(params.id)))
+    dispatch(fetchAllFavourite(Number(params.id)))
   }, [])
 
 

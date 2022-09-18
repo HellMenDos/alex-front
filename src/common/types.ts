@@ -43,5 +43,12 @@ export interface User {
 export interface Comment {
     message: string
     date: Date
-    question: number
+    questionId: number,
+    user?: User
+}
+export interface Favourite {
+    id?: number
+    date: Date
+    questionId: number
+    user?: User
 }
