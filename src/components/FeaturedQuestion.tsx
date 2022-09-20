@@ -16,7 +16,7 @@ export default function FeaturedQuestion(props: FeaturedQuestionProps) {
   const { question, md = 6 } = props;
 
   return (
-    <Grid item xs={12} md={md} sx={{ mt: 1}}>
+    <Grid item xs={12} md={md} sx={{ mt: 1 }}>
       <CardActionArea component="a" href={`/questions/${question.id}`}>
         <Card sx={{ display: 'flex', borderRadius:'20px' }}>
           <CardContent sx={{ flex: 1 }}>
@@ -27,7 +27,7 @@ export default function FeaturedQuestion(props: FeaturedQuestionProps) {
               {question.points}
             </Typography>
             <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={15}>
-              {question.describe}
+              {question.describe.slice(0,150)}...
             </Typography>
             <Typography variant="subtitle1" color="primary">
               Continue reading...

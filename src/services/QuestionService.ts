@@ -6,9 +6,21 @@ const QUESTIONS_DOMAIN = 'http://localhost:8080'
 
 export function QuestionService() {
     return {    
-        async get(lang: string, level: string, tech: string) {
+        async get(lang: string, level: string, tech: string, mode: string = 'fields') {
             try {
-                return (await axios.get(encodeURI(`${QUESTIONS_DOMAIN}/question/fields/${lang}/${level}/${tech}/`))).data as Question[]
+
+                let url = `${QUESTIONS_DOMAIN}/question/${mode}/`
+                if(lang) {
+                    url += `${lang}/`
+                }
+                if(level) {
+                    url += `${level}/`
+                }
+                if(tech) {
+                    url += `${tech}/`
+                }
+
+                return (await axios.get(encodeURI(url))).data as Question[] | Question
             }catch(e) {
                 console.log(e)
             }

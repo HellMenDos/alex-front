@@ -23,12 +23,11 @@ export default function Search() {
   const questions = useAppSelector((state) => state.question.questions)
 
   useEffect(() => {
-    console.log(searchParams.get('page'))
-    if(params.tech && params.level && params.lang) {
+    if(params) {
       dispatch(fetchAllQuestions({ 
-        tech: params.tech,
-        level: params.level,
-        lang: params.lang
+        tech: params.tech ? params.tech : '',
+        level: params.level ? params.level : '',
+        lang: params.lang ? params.lang : ''
       }))
     }
   }, [params])
