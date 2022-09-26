@@ -6,41 +6,24 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Alert, Pagination, Snackbar } from '@mui/material';
 
-import FeaturedPost from '../components/FeaturedQuestion';
+import MyQuestion from '../components/MyQuestion';
 import { Input } from '../components/Input';
 import CreateDialogPop from '../components/Popup';
-import { useAppSelector } from '../store/hooks';
-import { User } from '../common/types';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { User, Question } from '../common/types';
 import { AuthService } from '../services/AuthService';
 import { UserService } from '../services/UserService';
+import { QuestionService } from '../services/QuestionService';
+import { useSearchParams } from 'react-router-dom';
+import { fetchMyQuestions } from '../store/slices/questionSlice';
 
 const theme = createTheme();
 
-
-const featuredPosts = [
-    {
-      id:1,
-      title: 'Featured post',
-      date: 'Nov 12',
-      description:
-        'This is a wider card with supporting text below as a natural lead-in to additional content.',
-      image: 'https://source.unsplash.com/random',
-      imageLabel: 'Image Text',
-      
-    },
-    {
-      id:2,
-      title: 'Post title',
-      date: 'Nov 11',
-      description:
-        'This is a wider card with supporting text below as a natural lead-in to additional content.',
-      image: 'https://source.unsplash.com/random',
-      imageLabel: 'Image Text',
-    },
-  ];
-
 export default function Profile() {
   const user = useAppSelector((state) => state.user.user) as User
+  const questions = useAppSelector((state) => state.question.myquestions) as Question[]
+
+  const dispatch = useAppDispatch()
   const [ snackError, setSnackError ] = useState<boolean>(false)
   const [ snackSuccess, setSnackSuccess ] = useState<boolean>(false)
   const [ message, setMessage ] = useState<string>('')
@@ -49,12 +32,27 @@ export default function Profile() {
   const [email,setEmail] = useState<string>('')
   const [phone,setPhone] = useState<string>('')
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const TOTAL_POST_PER_PAGE = 10
+  const TOTAL_POSTS = TOTAL_POST_PER_PAGE * Number(searchParams.get('page'))
+  
   useEffect(() => {
     setName(user?.name)
     setEmail(user?.email)
     setPhone(user?.phone)
+    dispatch(fetchMyQuestions())
   }, [user])
 
+  const setPage = (pageNumber: string) => {
+    setSearchParams({ 'page': String(Number(pageNumber) - 1) })
+  }
+
+
+  const deleteQuestion = (id: number) => {
+    QuestionService().deleteMyQuestion(id).then(() => {
+      dispatch(fetchMyQuestions()) 
+    })
+  }
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -166,17 +164,30 @@ export default function Profile() {
             </Alert>
           </Snackbar>
         </Grid>
+
         <Grid item xs={12} style={{ padding: '15px'}} md={6}>
             <Typography component="h1" variant="h5" fontWeight="lighter">
               Ваши посты
             </Typography>
             <CreateDialogPop />
-            {/* {featuredPosts.map((post) => (
-              <FeaturedPost md={12} key={post.title} post={post} />
-            ))} */}
-            <div style={{width: "max-content", margin: "30px auto"}}> 
-              <Pagination count={10} variant="outlined" />
+          {questions.slice(TOTAL_POSTS, TOTAL_POSTS + 10).map((question) => (
+            <div style={{ display: 'flex ', justifyContent: 'space-between'}}>
+              <MyQuestion md={12} question={question} />
+              <Button style={{ margin: '10px'}} onClick={() => deleteQuestion(question.id)} variant="contained" color='error'>
+                Удалить
+              </Button>
             </div>
+          ))}
+          <div style={{width: "max-content", margin: "30px auto"}}> 
+            <Pagination 
+              count={Math.ceil(questions.length/TOTAL_POST_PER_PAGE)} 
+              page={Number(searchParams.get('page')) + 1} 
+              variant="outlined" 
+              onChange={(e: any) => setPage(e.target.innerText)}
+              hidePrevButton 
+              hideNextButton
+            />
+          </div> 
         </Grid>
     </Grid>
     </ThemeProvider>

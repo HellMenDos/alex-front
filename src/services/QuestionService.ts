@@ -4,20 +4,32 @@ import api from './api';
 
 const QUESTIONS_DOMAIN = 'http://localhost:8080'
 
+export enum Mode {
+    fields = 'fields',
+    random = 'random'
+}
+
 export function QuestionService() {
     return {    
-        async get(lang: string, level: string, tech: string, mode: string = 'fields') {
+        async get(lang: string, level: string, tech: string, mode: Mode = Mode.fields) {
             try {
 
-                let url = `${QUESTIONS_DOMAIN}/question/${mode}/`
+                let url = `${QUESTIONS_DOMAIN}/question/`
+
+                if(mode == Mode.fields) {
+                    url += `reverse/${mode}/`
+                }else {
+                    url += `${mode}/`
+                }
+
                 if(lang) {
                     url += `${lang}/`
                 }
-                if(level) {
-                    url += `${level}/`
-                }
                 if(tech) {
                     url += `${tech}/`
+                }
+                if(level) {
+                    url += `${level}`
                 }
 
                 return (await axios.get(encodeURI(url))).data as Question[] | Question
@@ -40,6 +52,20 @@ export function QuestionService() {
                     data: data,
                     headers: { "Content-Type": "multipart/form-data" },
                 })
+            }catch(e) {
+                console.log(e)
+            }
+        },
+        async getMyQuestions() {
+            try {
+                return (await api.get('/questions')).data
+            }catch(e) {
+                console.log(e)
+            }
+        },
+        async deleteMyQuestion(id: number) {
+            try {
+                return (await api.delete(`/questions/${id}`)).data
             }catch(e) {
                 console.log(e)
             }

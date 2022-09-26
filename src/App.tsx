@@ -25,6 +25,7 @@ import { fetchUser } from './store/slices/userSlice';
 import './style.css'
 import { StorageService } from './services/StorageService';
 import { useLocation } from 'react-router-dom';
+import Support from './pages/support';
 
 function App() {
   const navigate = useNavigate()
@@ -69,6 +70,7 @@ function App() {
             <Route path="search/:lang/:tech/:level" element={<Search />} />
             <Route path="questions/:id" element={<Questions />} />
             <Route path="course" element={<Course />} />
+            <Route path="support" element={<Support />} />
             <Route path="profile" element={!isAuth ? <Navigate replace to="/signin" /> : <Profile />} />
           </Route>
         </Routes>

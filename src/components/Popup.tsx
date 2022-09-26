@@ -5,7 +5,9 @@ import { QuestionService } from '../services/QuestionService';
 
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';;
+import Dialog from '@mui/material/Dialog';import { fetchMyQuestions } from '../store/slices/questionSlice';
+import { useAppDispatch } from '../store/hooks';
+;
 
 
 export interface CreateDialogProps {
@@ -18,6 +20,7 @@ export interface CreateDialogProps {
 
 function CreateDialog(props: CreateDialogProps) {
   const { onClose, open, setMessage, setSnackSuccess, setSnackError } = props;
+  const dispatch = useAppDispatch()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,6 +31,8 @@ function CreateDialog(props: CreateDialogProps) {
       setMessage('Вопрос создан')
       setSnackSuccess(true)
       setSnackError(false)
+      dispatch(fetchMyQuestions())
+
     }else {
       setMessage('Произашла ошибка')
       setSnackError(true)
@@ -47,6 +52,12 @@ function CreateDialog(props: CreateDialogProps) {
             </Grid>
             <Grid item xs={12}>
                 <Input style={{ width:"100%" }} placeholder='Описание' name="describe" />
+            </Grid>
+            <Grid item xs={12}>
+                <Input style={{ width:"100%" }} placeholder='Название языка' name="lang" />
+            </Grid>
+            <Grid item xs={12}>
+                <Input style={{ width:"100%" }} placeholder='Название технологии' name="tech" />
             </Grid>
             <Grid item xs={12}>
                 <Input style={{ width:"100%" }} type="file" placeholder='Фото' name="photo"/>

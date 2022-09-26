@@ -33,13 +33,14 @@ export default function Search() {
   }, [params])
 
   const filterPosts = (post: Question) => post.title.includes(search as string) || post.describe.includes(search as string)
+  
   const setPage = (pageNumber: string) => {
-    setSearchParams({ 'page': pageNumber })
+    setSearchParams({ 'page': String(Number(pageNumber) - 1) })
   }
 
   return (
         <main>
-          <Input value={search} onChange={({ target }) => setSearch(target.value)} style={{ width:"100%", marginTop: '10px' }} placeholder='Hello' />
+          <Input value={search} onChange={({ target }) => setSearch(target.value)} style={{ width:"100%", marginTop: '10px' }} placeholder='Поиск' />
           <Grid container spacing={4} style={{ marginTop:'1px' }}>
             {questions
             .filter((post) => filterPosts(post))
@@ -50,8 +51,8 @@ export default function Search() {
           </Grid>
           <div style={{width: "max-content", margin: "30px auto"}}> 
             <Pagination 
-              count={Math.ceil(questions.length/TOTAL_POST_PER_PAGE) - 1} 
-              page={Number(searchParams.get('page'))} 
+              count={Math.ceil(questions.length/TOTAL_POST_PER_PAGE)} 
+              page={Number(searchParams.get('page')) + 1} 
               variant="outlined" 
               onChange={(e: any) => setPage(e.target.innerText)}
               hidePrevButton 

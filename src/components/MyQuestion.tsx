@@ -7,19 +7,20 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Question } from '../common/types';
 import { placeholderImageUrl } from '../data';
+import { Button } from '@mui/material';
 
 interface FeaturedQuestionProps {
   question: Question;
   md?: number
 }
 
-export default function FeaturedQuestion(props: FeaturedQuestionProps) {
+export default function MyQuestion(props: FeaturedQuestionProps) {
   const { question, md = 6 } = props;
   const imageUrl = question?.photo ? `https://itbotinterview.ru${question?.photo}` : placeholderImageUrl
 
   return (
     <Grid item xs={12} md={md} sx={{ mt: 1 }}>
-      <CardActionArea component="a" href={`/questions/${question.id}`}>
+      <CardActionArea component="a">
         <Card sx={{ display: 'flex', borderRadius:'20px' }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5" fontWeight="bold">
@@ -28,9 +29,15 @@ export default function FeaturedQuestion(props: FeaturedQuestionProps) {
             <Typography variant="subtitle1" color="text.secondary" fontSize={13}>
               {question.points}
             </Typography>
-            <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={15}>
-              {question.describe.slice(0,150)}...
+            <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={12}>
+              {question.describe}
             </Typography>
+            <Typography paragraph fontWeight="lighter" fontSize={11}>
+              {`${question.lang} ${question.tech}`}
+            </Typography>
+            <Button color={question.verify ? 'success' : 'warning'} size='small'>
+              {question.verify ? 'Опубликован' : 'Рассматривается'}
+            </Button>
           </CardContent>
           <CardMedia
             component="img"

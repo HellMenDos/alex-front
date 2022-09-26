@@ -10,12 +10,14 @@ interface Store {
   questions: Question[]
   comments: Comment[]
   favourites: Favourite[]
+  myquestions: Question[]
 }
 
 const initialState: Store = {
   questions: [],
   comments: [],
-  favourites: []
+  favourites: [],
+  myquestions: []
 };
 
 type questionParams = { lang: string, level: string, tech: string }
@@ -41,7 +43,13 @@ export const fetchAllFavourite = createAsyncThunk(
   }
 )
   
-  
+export const fetchMyQuestions = createAsyncThunk(
+  'questions/fetchMyQuestions',
+  async (_, thunkAPI) => {
+    return await QuestionService().getMyQuestions()
+  }
+)
+
 const questionsSlice = createSlice({
     name: 'questions',
     initialState,
@@ -56,6 +64,9 @@ const questionsSlice = createSlice({
         })
         builder.addCase(fetchAllComments.fulfilled, (state, action) => {
           state.comments = [ ...action.payload  as Comment[]  ]
+        })
+        builder.addCase(fetchMyQuestions.fulfilled, (state, action) => {
+          state.myquestions = [ ...action.payload  as Question[]  ]
         })
       },
 });

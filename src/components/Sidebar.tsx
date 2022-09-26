@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -29,7 +28,7 @@ export default function Sidebar(props: SidebarProps) {
 
       <Paper elevation={0} sx={{ padding: '10px', marginTop:'20px', bgcolor: '#1315200d',borderRadius:'20px' }}>
         <Typography variant="h6" gutterBottom>
-          Archives
+          Наши площадки
         </Typography>
         {archives.map((archive) => (
           <Link display="block" variant="body1" href={archive.url} key={archive.title}>

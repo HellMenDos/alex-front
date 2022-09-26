@@ -18,63 +18,101 @@ import { fetchAllComments, fetchAllFavourite } from '../store/slices/questionSli
 
 interface MainProps {
   question: Question;
+  isMain?: boolean
 }
 
-export default function Main({ question }: MainProps) {
-  const comments = useAppSelector((state) => state.question)
-  const userData = useAppSelector((state) => state.user.user) as User
-
+function CommentForm({ id }: { id: string }) {
   const dispatch = useAppDispatch()
   const [comment, setCommet] = useState<string>('')
-  const params = useParams<{ id: string }>()
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await CommentsService().create({
-      questionId: Number(params.id),
+      questionId: Number(id),
       date: new Date(),
       message: comment
     })
 
-    dispatch(fetchAllComments(Number(params.id)))
+    dispatch(fetchAllComments(Number(id)))
   }
+
+  return (
+    <form onSubmit={onSubmit}>
+      <Input style={{ width:"100%", marginTop: '20px' }} placeholder="Комментарий" value={comment} onChange={({ target }) => setCommet(target.value)} />
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}>
+        Оставить комментарий
+      </Button>
+    </form>
+  )
+}
+
+function CommentItem({ item }: { item: Comment}) {
+  const datetime = (item.date as string)
+  const date = datetime.split('T')[0]
+  const time = datetime.split('T')[1].split('.')[0]
+
+  return (
+    <div style={{ 
+      display: 'flex', 
+      justifyContent:'space-between',
+      background: '#1315200d',
+      padding: '10px',
+      borderRadius: '10px',
+      marginBottom: '10px'
+    }}>
+      <div style={{ fontWeight: 'bold' }}>{item.user?.name}</div>
+      <div>{item.message}</div>
+      <div style={{ fontWeight: 'lighter' }}>{date} {time}</div>
+    </div>
+  )
+}
+
+export default function Main({ question,isMain = false }: MainProps) {
+  const comments = useAppSelector((state) => state.question)
+  const userData = useAppSelector((state) => state.user.user) as User
+
+  const dispatch = useAppDispatch()
+  const params = useParams<{ id: string }>()
 
   const addToFavourite = async () => {
     await FavouritesService().create({
       date: new Date(),
       questionId: Number(params.id)
     })
+    dispatch(fetchAllFavourite(Number(params.id)))
   }
 
   const deleteFromFavourite = async (id: number) => {
     await FavouritesService().delete(id)
+    dispatch(fetchAllFavourite(Number(params.id)))
   }
 
   const isUserLikes = comments.favourites.find(({ user }) => user?.id == userData?.id)
+  const questionPhoto = question.photo?.split('8080')[1] ? `https://itbotinterview.ru${question.photo?.split('8080')[1]}` : ''
+  const likeText = !userData.id ? 'Чтобы поставить отметку авторизуйся' : 'Нравится'
 
   return (
     <Grid item xs={12}md={8} sx={{ '& .markdown': { py: 3, }}}>
       <Typography variant="h6" gutterBottom>
-        {question.title} {comments.favourites.length}
+        {question.title}
       </Typography>
+      <div>Нравится: {comments.favourites.length} пользователям</div>
       <Divider />
-      { isUserLikes?.id ? 
-        <Button onClick={() => deleteFromFavourite(isUserLikes?.id as number)}>Delete</Button> : 
-        <Button onClick={addToFavourite}>Add to Favoutite</Button>
+      { !isMain && (isUserLikes?.id ? 
+        <Button disabled={!userData.id} onClick={() => deleteFromFavourite(isUserLikes?.id as number)}>Удалить нравится</Button> : 
+        <Button disabled={!userData.id} onClick={addToFavourite}>{likeText}</Button>)
       }
-      <CardMedia 
-        component="img"
-        image={`https://itbotinterview.ru${question.photo?.split('8080')[1]}` || ''} />
+      {questionPhoto && <CardMedia component="img" image={questionPhoto} />}
       <Markdown className="markdown">
         {question.describe}
       </Markdown>
-      <form onSubmit={onSubmit}>
-      <Input style={{ width:"100%", marginTop: '20px' }} placeholder="Комментарий" value={comment} onChange={({ target }) => setCommet(target.value)} />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}>
-        Оставить комментарий
-      </Button>
-      </form>
-      {comments.comments.map(item => <div>{item.message}</div>)}
+      {isMain && (
+        <Button type="submit" href={`/questions/${question.id}`} fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}>
+          Перейти к вопросу
+        </Button>)
+      }
+      {userData.id ? (!isMain && <CommentForm id={params.id as string}/>) : <div>Чтобы оставить комментарий авторизуйся</div>}
+      {comments.comments.map(item => <CommentItem item={item} />)}
     </Grid>
   );
 }

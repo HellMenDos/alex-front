@@ -15,7 +15,6 @@ import { StorageService } from '../services/StorageService';
 import { User } from '../common/types';
 
 interface HeaderProps {
-  sections: Array<any>;
   title: string;
 }
 
@@ -55,9 +54,7 @@ function Header(props: HeaderProps) {
     navigate('/signin')
   }
 
-  useEffect(() => {
-    console.log(user)
-  })
+  const activeLink = (title: string) => params.level == title  ? '#1112154d' : '#1315200d'
 
 
   return (
@@ -73,40 +70,40 @@ function Header(props: HeaderProps) {
         left: 0,
         zIndex:10
       }}>
-        <Button variant="contained" size="small" sx={{ background: "#e75357",  borderRadius: '10px', boxShadow:'none'}}>
-          IT BOT
-        </Button>
         <Typography
           component="h2"
           variant="h5"
           color="white"
-          align="center"
           fontWeight="bold"
-          noWrap
           sx={{ flex: 1, letterSpacing:'5px' }}
         >
-          <Link sx={{ textDecoration:"none", color:"white" }} href='/'>
+          <Link sx={{ color:'white', textDecoration:'none', fontWeight: 'bold', letterSpacing: '4px' }} href='/'>
           {title}
           </Link>
         </Typography>
-
+        <Link href='https://t.me/interviewITBot' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
+          IT BOT
+        </Link>
+        <Link href='/support' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
+          ПОМОЩЬ
+        </Link>
         {user?.id ? 
-        <Button variant="contained" size="small"  href='/profile' sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}>
+        <Link href='/profile' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
           {user?.name}
-        </Button> :
-        <Button variant="contained" size="small" href='/signin' sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}>
+        </Link> :
+        <Link href='/signin' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
           Войти
-        </Button>}
+        </Link>}
         {user?.id &&         
-        <Button onClick={exit} variant="contained" size="small" sx={{background: "#1dc62e", borderRadius: '10px', boxShadow:'none'}}>
+        <Link onClick={exit} sx={{color:'white', textDecoration:'none', marginLeft:'10px' }}>
           Выйти
-        </Button>}
+        </Link>}
       </Toolbar>
       <Toolbar
         component="nav"
         variant="dense"
         sx={{ 
-          justifyContent: 'space-between',
+          justifyContent:'center',
           overflowX: 'auto',
           paddingLeft: '0px',
           paddingRight: '0px'
@@ -121,8 +118,10 @@ function Header(props: HeaderProps) {
             href={makeHref(section.title)}
             sx={{
                flexShrink: 0,
-               background: '#1315200d',
+               background: activeLink(section.title),
                borderRadius: '15px',
+               marginLeft: '10px',
+               marginRight: '10px',
                fontWeight: 'bold', 
                padding:'8px 15px', 
                textDecoration:"none"}}
@@ -136,7 +135,7 @@ function Header(props: HeaderProps) {
 }
 
 Header.defaultProps = {
-  title: "Привет"
+  title: "ALEXITINTER"
 }
 
 Header.propTypes = {

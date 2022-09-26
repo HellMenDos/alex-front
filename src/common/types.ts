@@ -28,6 +28,7 @@ export interface Question {
     lang: Lang,
     tech: Tech
     level: Level
+    verify?: boolean
 }
 
 export interface User {
@@ -42,7 +43,7 @@ export interface User {
 
 export interface Comment {
     message: string
-    date: Date
+    date: Date | string,
     questionId: number,
     user?: User
 }
