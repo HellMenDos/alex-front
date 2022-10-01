@@ -1,6 +1,7 @@
 import axios from "axios"
 import { Level } from '../common/types';
-const QUESTIONS_DOMAIN = 'http://localhost:8080'
+import { QUESTIONS_DOMAIN } from "./api";
+
 
 export function LevelService() {
     return {    

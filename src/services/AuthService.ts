@@ -1,13 +1,13 @@
 import axios from "axios"
+import { MAIN_DOMAIN } from "./api";
 import { StorageService } from './StorageService';
-const QUESTIONS_DOMAIN = 'http://localhost:4000'
 
 
 export function AuthService() {
     return {    
         async signin({ email, password }:{ email: string, password: string } ) {
             try {
-                const response = await axios.post(`${QUESTIONS_DOMAIN}/users/signin`, { email, password })
+                const response = await axios.post(`${MAIN_DOMAIN}/users/signin`, { email, password })
                 StorageService().set('tokens',response.data)
                 return response
             } catch(e: any) {
@@ -16,7 +16,7 @@ export function AuthService() {
         },
         async signup({ email, password, phone, name }:{ email: string, password: string, phone: string, name: string } ) {
             try {
-                const response = await axios.post(`${QUESTIONS_DOMAIN}/users/signup`, { email, password, phone, name })
+                const response = await axios.post(`${MAIN_DOMAIN}/users/signup`, { email, password, phone, name })
                 return response
             } catch(e: any) {
                 return {data: null, error: e.response.data.error}
@@ -24,7 +24,7 @@ export function AuthService() {
         },
         async forget({ email }: { email: string }) {
             try {
-                const response = await axios.post(`${QUESTIONS_DOMAIN}/users/forget`, { email })
+                const response = await axios.post(`${MAIN_DOMAIN}/users/forget`, { email })
                 return response
             } catch(e: any) {
                 return {data: null, error: e.response.data.error}
@@ -35,7 +35,7 @@ export function AuthService() {
             const tokens = StorageService().get('tokens')
             if(tokens.refresh_token) {
                 try {
-                    const response = await axios.post(`${QUESTIONS_DOMAIN}/users/refresh`,{}, {
+                    const response = await axios.post(`${MAIN_DOMAIN}/users/refresh`,{}, {
                         headers: {
                             Authorization: `Token ${tokens.refresh_token}`
                         }

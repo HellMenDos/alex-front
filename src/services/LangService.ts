@@ -1,6 +1,6 @@
 import { Lang } from '../common/types';
 import axios from 'axios';
-const QUESTIONS_DOMAIN = 'http://localhost:8080'
+import { QUESTIONS_DOMAIN } from './api';
 
 export function LangService() {
     return {    

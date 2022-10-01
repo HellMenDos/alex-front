@@ -1,8 +1,7 @@
 import axios from "axios"
 import { Question } from '../common/types';
-import api from './api';
+import api, { QUESTIONS_DOMAIN } from './api';
 
-const QUESTIONS_DOMAIN = 'http://localhost:8080'
 
 export enum Mode {
     fields = 'fields',

@@ -2,8 +2,11 @@ import axios from "axios";
 import { StorageService } from "./StorageService";
 import { AuthService } from './AuthService';
 
+export const QUESTIONS_DOMAIN = 'https://62.113.109.57'
+export const MAIN_DOMAIN = 'http://localhost/api'
+
 const api = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: MAIN_DOMAIN,
 
 });
 
@@ -27,3 +30,4 @@ api.interceptors.response.use(undefined,(res: any) => {
 });
 
 export default api
+
