@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
@@ -11,12 +11,23 @@ import { Question, User } from '../common/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchAllComments, fetchAllFavourite } from '../store/slices/questionSlice';
 import { sidebar } from '../data';
+import DocumentMeta from 'react-document-meta';
 
 
 export default function Questions() {
   const params = useParams<{ id: string }>()
   const dispatch = useAppDispatch()
   const [question, setQuestion] = useState<Question>()
+  const meta = useRef<any>({
+    title: 'Поиск',
+    description: 'Найди интересующий тебя вопрос',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'react,meta,document,html,tags'
+      }
+    }
+  })
 
   useEffect(() => {
     QuestionService().getOne(Number(params.id))
@@ -26,9 +37,13 @@ export default function Questions() {
     dispatch(fetchAllFavourite(Number(params.id)))
   }, [])
 
+  useEffect(() => {
+    meta.current.title = question?.title
+    meta.current.description = question?.describe
+  }, [question])
 
   return (
-        <main>
+        <DocumentMeta {...(meta.current)}>
           <Grid container spacing={5} sx={{ mt: 3 }}>
             {question && <Main question={question as Question} />}
             <Sidebar
@@ -37,6 +52,6 @@ export default function Questions() {
               archives={sidebar.archives}
             />
           </Grid>
-        </main>
+        </DocumentMeta>
   );
 }

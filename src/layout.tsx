@@ -5,6 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import { Container, createTheme, CssBaseline } from '@mui/material';
 
 import Header from './components/Header';
+import './styles/style.css'
 
 const theme = createTheme();
 

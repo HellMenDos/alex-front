@@ -16,7 +16,7 @@ interface FeaturedQuestionProps {
 
 export default function MyQuestion(props: FeaturedQuestionProps) {
   const { question, md = 6 } = props;
-  const imageUrl = question?.photo ? `https://itbotinterview.ru${question?.photo}` : placeholderImageUrl
+  const imageUrl = question?.photo ? `http://127.0.0.1/media/${question?.photo}` : placeholderImageUrl
 
   return (
     <Grid item xs={12} md={md} sx={{ mt: 1 }}>
@@ -27,17 +27,14 @@ export default function MyQuestion(props: FeaturedQuestionProps) {
               {question.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" fontSize={13}>
-              {question.points}
+              {`${question?.lang} ${question?.tech}`}
             </Typography>
             <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={12}>
               {question.describe}
             </Typography>
-            <Typography paragraph fontWeight="lighter" fontSize={11}>
-              {`${question.lang} ${question.tech}`}
-            </Typography>
-            <Button color={question.verify ? 'success' : 'warning'} size='small'>
+            <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={10}>
               {question.verify ? 'Опубликован' : 'Рассматривается'}
-            </Button>
+            </Typography>
           </CardContent>
           <CardMedia
             component="img"

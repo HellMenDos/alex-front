@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Box, Grid, Snackbar } from '@mui/material';
-import { Input } from './Input';
+import { Input, TextArea } from './Input';
 import { QuestionService } from '../services/QuestionService';
 
 import Button from '@mui/material/Button';
@@ -43,15 +43,15 @@ function CreateDialog(props: CreateDialogProps) {
   }
 
   return (
-    <Dialog open={open}>
-        <DialogTitle>Создай вопрос</DialogTitle>
+    <Dialog onClose={onClose} open={open}>
+        <DialogTitle fontWeight={'bold'}>Создай вопрос</DialogTitle>
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={2} style={{ padding: '20px'}}>
             <Grid item xs={12}>
                 <Input style={{ width:"100%" }} placeholder='Название' name="title" />
             </Grid>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Описание' name="describe" />
+                <TextArea style={{ width:"100%" }} required  placeholder='Описание' name='describe' />
             </Grid>
             <Grid item xs={12}>
                 <Input style={{ width:"100%" }} placeholder='Название языка' name="lang" />

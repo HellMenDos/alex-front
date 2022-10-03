@@ -20,18 +20,17 @@ export default function Sidebar(props: SidebarProps) {
     <Grid item xs={12} md={4}>
 
       <Paper elevation={0} sx={{ p: 2, bgcolor: '#1315200d',borderRadius:'20px' }}>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom fontWeight='bold'>
           {title}
         </Typography>
-        <Typography>{description}</Typography>
-      </Paper>
-
+        <Typography fontWeight={'lighter'}>{description}</Typography>
+      </Paper> 
       <Paper elevation={0} sx={{ padding: '10px', marginTop:'20px', bgcolor: '#1315200d',borderRadius:'20px' }}>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom fontWeight='bold'>
           Наши площадки
         </Typography>
         {archives.map((archive) => (
-          <Link display="block" variant="body1" href={archive.url} key={archive.title}>
+          <Link display="block" variant="body1" fontWeight='lighter' href={archive.url} key={archive.title}>
             {archive.title}
           </Link>
         ))}

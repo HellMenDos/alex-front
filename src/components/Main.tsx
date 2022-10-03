@@ -61,7 +61,7 @@ function CommentItem({ item }: { item: Comment}) {
       marginBottom: '10px'
     }}>
       <div style={{ fontWeight: 'bold' }}>{item.user?.name}</div>
-      <div>{item.message}</div>
+      <div style={{ width: '50%' }}>{item.message}</div>
       <div style={{ fontWeight: 'lighter' }}>{date} {time}</div>
     </div>
   )
@@ -89,29 +89,30 @@ export default function Main({ question,isMain = false }: MainProps) {
 
   const isUserLikes = comments.favourites.find(({ user }) => user?.id == userData?.id)
   const questionPhoto = question.photo?.split('8080')[1] ? `https://itbotinterview.ru${question.photo?.split('8080')[1]}` : ''
-  const likeText = !userData.id ? 'Чтобы поставить отметку авторизуйся' : 'Нравится'
+  const likeText = !userData?.id ? 'Чтобы поставить отметку авторизуйся' : 'Нравится'
 
   return (
     <Grid item xs={12}md={8} sx={{ '& .markdown': { py: 3, }}}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom fontWeight='bold'>
         {question.title}
       </Typography>
-      <div>Нравится: {comments.favourites.length} пользователям</div>
+      <div style={{ fontWeight:'lighter' }}>Нравится: {comments.favourites.length} пользователям</div>
       <Divider />
       { !isMain && (isUserLikes?.id ? 
-        <Button disabled={!userData.id} onClick={() => deleteFromFavourite(isUserLikes?.id as number)}>Удалить нравится</Button> : 
-        <Button disabled={!userData.id} onClick={addToFavourite}>{likeText}</Button>)
+        <Button disabled={!userData?.id} onClick={() => deleteFromFavourite(isUserLikes?.id as number)}>Удалить нравится</Button> : 
+        <Button disabled={!userData?.id} onClick={addToFavourite}>{likeText}</Button>)
       }
+      <Divider />
       {questionPhoto && <CardMedia component="img" image={questionPhoto} />}
       <Markdown className="markdown">
         {question.describe}
       </Markdown>
       {isMain && (
-        <Button type="submit" href={`/questions/${question.id}`} fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}>
+        <Button type="submit" href={`/questions/${question?.id}`} fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa"}}>
           Перейти к вопросу
         </Button>)
       }
-      {userData.id ? (!isMain && <CommentForm id={params.id as string}/>) : <div>Чтобы оставить комментарий авторизуйся</div>}
+      {userData?.id ? (!isMain && <CommentForm id={params.id as string}/>) : <div style={{ fontWeight:'lighter' }}>Чтобы оставить комментарий авторизуйся</div>}
       {comments.comments.map(item => <CommentItem item={item} />)}
     </Grid>
   );

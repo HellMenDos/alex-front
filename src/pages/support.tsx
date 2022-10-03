@@ -4,13 +4,14 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { Input } from '../components/Input';
+import { Input,TextArea } from '../components/Input';
 import { Alert, Snackbar } from '@mui/material';
 import { UserService } from '../services/UserService';
+import DocumentMeta from 'react-document-meta';
 
 const theme = createTheme();
 
@@ -18,7 +19,16 @@ export default function Support() {
   const [ snackError, setSnackError ] = useState<boolean>(false)
   const [ snackSuccess, setSnackSuccess ] = useState<boolean>(false)
   const [ message, setMessage ] = useState<string>('')
-
+  const meta = {
+    title: 'Помощь',
+    description: 'Задай вопрос и получи ответ',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'react,meta,document,html,tags'
+      }
+    }
+  };
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -50,6 +60,7 @@ export default function Support() {
   };
 
   return (
+    <DocumentMeta {...meta}>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -61,7 +72,7 @@ export default function Support() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" fontWeight='bold'>
             Связаться с нами
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -76,7 +87,7 @@ export default function Support() {
                 <Input style={{ width:"100%" }} required type="name" placeholder='Оглавление' name='title'/>
               </Grid>
               <Grid item xs={12}>
-                <Input style={{ width:"100%" }} required type="text" placeholder='Описание' name='describe'/>
+                <TextArea style={{ width:"100%" }} required  placeholder='Описание' name='describe' />
               </Grid>
               <Grid item xs={12}>
                 <Input style={{ width:"100%" }} required type="text" placeholder='Ваш телеграм' name='telegram'/>
@@ -104,5 +115,6 @@ export default function Support() {
         </Snackbar>
       </Container>
     </ThemeProvider>
+    </DocumentMeta>
   );
 }

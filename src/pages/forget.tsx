@@ -13,6 +13,7 @@ import { Input } from '../components/Input';
 
 import { AuthService } from '../services/AuthService';
 import { Alert, Snackbar } from '@mui/material';
+import DocumentMeta from 'react-document-meta';
 
 const theme = createTheme();
 
@@ -20,7 +21,16 @@ export default function Forget() {
   const [ snackError, setSnackError ] = useState<boolean>(false)
   const [ snackSuccess, setSnackSuccess ] = useState<boolean>(false)
   const [ message, setMessage ] = useState<string>('')
-
+  const meta = {
+    title: 'Забыли пароль ?',
+    description: 'Восстанови свой пароль тут',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'react,meta,document,html,tags'
+      }
+    }
+  };
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -44,6 +54,7 @@ export default function Forget() {
   };
 
   return (
+    <DocumentMeta {...meta}>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -55,7 +66,7 @@ export default function Forget() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" fontWeight='bold'>
             Забыли пароль ?
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -91,5 +102,6 @@ export default function Forget() {
         </Snackbar>
       </Container>
     </ThemeProvider>
+    </DocumentMeta>
   );
 }

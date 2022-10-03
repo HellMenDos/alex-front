@@ -14,6 +14,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { Input } from '../components/Input';
 import { AuthService } from '../services/AuthService';
 import { Alert, IconButton } from '@mui/material';
+import DocumentMeta from 'react-document-meta';
 
 const theme = createTheme();
 
@@ -22,7 +23,16 @@ export default function Signin() {
   const [ error, setError ] = useState<string>('')
 
   const navigate = useNavigate()
-
+  const meta = {
+    title: 'Вход',
+    description: 'Войди в свой аккаунт и создай свой вопрос на собеседование.',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'react,meta,document,html,tags'
+      }
+    }
+  };
 
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -49,6 +59,7 @@ export default function Signin() {
   };
 
   return (
+    <DocumentMeta {...meta}>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -60,7 +71,7 @@ export default function Signin() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" fontWeight='bold'>
             Войти
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -99,5 +110,6 @@ export default function Signin() {
         </Snackbar>
       </Container>
     </ThemeProvider>
+    </DocumentMeta>
   );
 }

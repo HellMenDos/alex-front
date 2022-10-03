@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
-
 interface MainFeaturedPostProps {
   post: {
     description: string;
@@ -54,10 +53,21 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx={{ fontWeight:"bold" }}>
+            <Typography 
+              component="h1" 
+              variant="h3" 
+              color="inherit" 
+              gutterBottom 
+              sx={{ fontWeight:"bold" }}
+              className="MainBoxContainerText">
               {post.title}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph sx={{ fontWeight:"lighter", fontSize:"20px" }}>
+            <Typography 
+              variant="h5" 
+              color="inherit" 
+              paragraph 
+              sx={{ fontWeight:"lighter", fontSize:"20px" }}
+              className="MainBoxContainerSubText">
               {post.description}
             </Typography>
             <Link variant="subtitle1" href="#" sx={{color: "white", textDecoration: "none", fontWeight: "bold", letterSpacing: "4px",}}>

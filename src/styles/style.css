@@ -1,0 +1,25 @@
+.MainBoxContainer {
+
+}
+
+.MainBoxContainerText {
+
+}
+.MainBoxContainerSubText {
+
+}
+
+.MuiButton-containedPrimary {
+    padding: 10px !important;
+    font-weight: bold !important;
+}
+
+@media (max-width:800px) {
+    .MainBoxContainerText {
+        font-size: 25px !important;
+    }
+    .MainBoxContainerSubText {
+        font-size: 15px !important;
+    }
+}
+ 

@@ -75,27 +75,27 @@ function Header(props: HeaderProps) {
           variant="h5"
           color="white"
           fontWeight="bold"
-          sx={{ flex: 1, letterSpacing:'5px' }}
+          sx={{ flex: 1 }}
         >
-          <Link sx={{ color:'white', textDecoration:'none', fontWeight: 'bold', letterSpacing: '4px' }} href='/'>
+          <Link sx={{ color:'white', textDecoration:'none', fontWeight: 'bold' }} href='/'>
           {title}
           </Link>
         </Typography>
-        <Link href='https://t.me/interviewITBot' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
+        <Link href='https://t.me/interviewITBot' sx={{ color:'white', textDecoration:'none', marginLeft:'10px', fontWeight:'lighter' }}>
           IT BOT
         </Link>
-        <Link href='/support' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
+        <Link href='/support' sx={{ color:'white', textDecoration:'none', marginLeft:'10px', fontWeight:'lighter' }}>
           ПОМОЩЬ
         </Link>
         {user?.id ? 
-        <Link href='/profile' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
+        <Link href='/profile' sx={{ color:'white', textDecoration:'none', marginLeft:'10px', fontWeight:'lighter' }}>
           {user?.name}
         </Link> :
-        <Link href='/signin' sx={{ color:'white', textDecoration:'none', marginLeft:'10px' }}>
+        <Link href='/signin' sx={{ color:'white', textDecoration:'none', marginLeft:'10px', fontWeight:'lighter' }}>
           Войти
         </Link>}
         {user?.id &&         
-        <Link onClick={exit} sx={{color:'white', textDecoration:'none', marginLeft:'10px' }}>
+        <Link onClick={exit} sx={{color:'white', textDecoration:'none', marginLeft:'10px', fontWeight:'lighter' }}>
           Выйти
         </Link>}
       </Toolbar>

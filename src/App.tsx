@@ -22,10 +22,10 @@ import { fetchAllTechs } from './store/slices/techSlice';
 import { fetchAllLevels } from './store/slices/levelSlice';
 import { fetchUser } from './store/slices/userSlice';
 
-import './style.css'
 import { StorageService } from './services/StorageService';
 import { useLocation } from 'react-router-dom';
 import Support from './pages/support';
+import NotFound from './pages/404';
 
 function App() {
   const navigate = useNavigate()
@@ -72,6 +72,7 @@ function App() {
             <Route path="course" element={<Course />} />
             <Route path="support" element={<Support />} />
             <Route path="profile" element={!isAuth ? <Navigate replace to="/signin" /> : <Profile />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
   )

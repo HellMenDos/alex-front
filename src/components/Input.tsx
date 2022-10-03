@@ -1,5 +1,7 @@
 import * as React from 'react';
 import InputUnstyled from '@mui/base/InputUnstyled';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+
 import { styled } from '@mui/system';
 
 const blue = {
@@ -48,6 +50,31 @@ const StyledInputElement = styled('input')(
 `,
 );
 
+const StyledTextAreaElement = styled('textarea')(
+  ({ theme }) => `
+  width: 100%;
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 12px;
+  border-radius: 12px;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+  box-shadow: 0px 4px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
+
+  &:hover {
+    border-color: ${blue[400]};
+  }
+
+  &:focus {
+    border-color: ${blue[400]};
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[500] : blue[200]};
+  }
+`,
+);
+
 export const Input = React.forwardRef(function CustomInput(
   props: React.InputHTMLAttributes<HTMLInputElement>,
   ref: React.ForwardedRef<HTMLDivElement>,
@@ -56,3 +83,7 @@ export const Input = React.forwardRef(function CustomInput(
     <InputUnstyled components={{ Input: StyledInputElement }} {...props} ref={ref} />
   );
 });
+
+export const TextArea = function (props: any) {
+  return <StyledTextAreaElement {...props} />;
+};

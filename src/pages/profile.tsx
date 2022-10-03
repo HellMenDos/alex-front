@@ -16,6 +16,7 @@ import { UserService } from '../services/UserService';
 import { QuestionService } from '../services/QuestionService';
 import { useSearchParams } from 'react-router-dom';
 import { fetchMyQuestions } from '../store/slices/questionSlice';
+import DocumentMeta from 'react-document-meta';
 
 const theme = createTheme();
 
@@ -47,6 +48,16 @@ export default function Profile() {
     setSearchParams({ 'page': String(Number(pageNumber) - 1) })
   }
 
+  const meta = {
+    title: 'Профиль',
+    description: 'Отредактируй свои данные и создвй вопрос',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'react,meta,document,html,tags'
+      }
+    }
+  };
 
   const deleteQuestion = (id: number) => {
     QuestionService().deleteMyQuestion(id).then(() => {
@@ -94,10 +105,11 @@ export default function Profile() {
   }
 
   return (
+    <DocumentMeta {...meta}>
     <ThemeProvider theme={theme}>
     <Grid container>
         <Grid item xs={12} style={{ padding: '15px'}} md={6}>
-          <Typography component="h1" variant="h5" fontWeight="lighter" sx={{ mb: 1 }}>
+          <Typography component="h1" variant="h5" fontWeight="bold" sx={{ mb: 1 }}>
             Изменить данные
           </Typography>
           <Box component="form" onSubmit={handleSubmit}>
@@ -166,16 +178,14 @@ export default function Profile() {
         </Grid>
 
         <Grid item xs={12} style={{ padding: '15px'}} md={6}>
-            <Typography component="h1" variant="h5" fontWeight="lighter">
+            <Typography component="h1" variant="h5" fontWeight="bold">
               Ваши посты
             </Typography>
             <CreateDialogPop />
           {questions.slice(TOTAL_POSTS, TOTAL_POSTS + 10).map((question) => (
-            <div style={{ display: 'flex ', justifyContent: 'space-between'}}>
+            <div style={{ display: 'flex ', justifyContent: 'space-between', alignItems: 'center'}}>
               <MyQuestion md={12} question={question} />
-              <Button style={{ margin: '10px'}} onClick={() => deleteQuestion(question.id)} variant="contained" color='error'>
-                Удалить
-              </Button>
+              <img src='./delete.png' width={20} onClick={() => deleteQuestion(question.id)} style={{ marginLeft: '10px' }} />
             </div>
           ))}
           <div style={{width: "max-content", margin: "30px auto"}}> 
@@ -191,5 +201,6 @@ export default function Profile() {
         </Grid>
     </Grid>
     </ThemeProvider>
+    </DocumentMeta>
   );
 }

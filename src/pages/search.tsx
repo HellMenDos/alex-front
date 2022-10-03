@@ -10,6 +10,7 @@ import { Input } from '../components/Input';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchAllQuestions } from '../store/slices/questionSlice';
 import { Question } from '../common/types';
+import DocumentMeta from 'react-document-meta';
 
 
 
@@ -21,7 +22,16 @@ export default function Search() {
   const params = useParams()
   const dispatch = useAppDispatch()
   const questions = useAppSelector((state) => state.question.questions)
-
+  const meta = {
+    title: 'Поиск',
+    description: 'Найди интересующий тебя вопрос',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'react,meta,document,html,tags'
+      }
+    }
+  };
   useEffect(() => {
     if(params) {
       dispatch(fetchAllQuestions({ 
@@ -39,7 +49,7 @@ export default function Search() {
   }
 
   return (
-        <main>
+        <DocumentMeta {...meta}>
           <Input value={search} onChange={({ target }) => setSearch(target.value)} style={{ width:"100%", marginTop: '10px' }} placeholder='Поиск' />
           <Grid container spacing={4} style={{ marginTop:'1px' }}>
             {questions
@@ -59,6 +69,6 @@ export default function Search() {
               hideNextButton
             />
           </div>
-        </main>
+        </DocumentMeta>
   );
 }
