@@ -17,8 +17,11 @@ export interface CreateDialogProps {
   setSnackError: (value: boolean) => void
   setSnackSuccess: (value: boolean) => void
 }
+ 
+
 
 function CreateDialog(props: CreateDialogProps) {
+  const [photoText, setPhotoText] = useState<string>('Выбрать фото')
   const { onClose, open, setMessage, setSnackSuccess, setSnackError } = props;
   const dispatch = useAppDispatch()
 
@@ -48,19 +51,20 @@ function CreateDialog(props: CreateDialogProps) {
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={2} style={{ padding: '20px'}}>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Название' name="title" />
+                <Input style={{ width:"100%" }} required placeholder='Название' name="title" />
             </Grid>
             <Grid item xs={12}>
                 <TextArea style={{ width:"100%" }} required  placeholder='Описание' name='describe' />
             </Grid>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Название языка' name="lang" />
+                <Input style={{ width:"100%" }} required placeholder='Название языка' name="lang" />
             </Grid>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} placeholder='Название технологии' name="tech" />
+                <Input style={{ width:"100%" }} required placeholder='Название технологии' name="tech" />
             </Grid>
             <Grid item xs={12}>
-                <Input style={{ width:"100%" }} type="file" placeholder='Фото' name="photo"/>
+                <label htmlFor="photo" className="choocePhoto">{photoText}</label>
+                <Input style={{ width:"100%",display:'none' }} onChange={() => setPhotoText('Фото выбрано')} type="file" placeholder='Фото' name="photo" id='photo'/>
             </Grid>
             <Button
               type="submit"

@@ -1,9 +1,13 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 interface MainFeaturedPostProps {
   post: {
     description: string;
@@ -16,8 +20,27 @@ interface MainFeaturedPostProps {
 
 export default function MainFeaturedPost(props: MainFeaturedPostProps) {
   const { post } = props;
+  const control = useAnimation();
+  const [ref, inView] = useInView();
+  const boxVariant = {
+    visible: { opacity: 1, translateX: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, translateX: -100 }
+  }
+
+  useEffect(() => {
+    if (inView) {
+      control.start("visible");
+    } else {
+      control.start("hidden");
+    }
+  }, [control, inView]);
 
   return (
+    <motion.div 
+      variants={boxVariant} 
+      animate={control}
+      ref={ref}
+    >
     <Paper
       sx={{
         position: 'relative',
@@ -77,5 +100,6 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         </Grid>
       </Grid>
     </Paper>
+    </motion.div>
   );
 }

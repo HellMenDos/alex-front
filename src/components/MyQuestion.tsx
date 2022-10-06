@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Question } from '../common/types';
 import { placeholderImageUrl } from '../data';
-import { Button } from '@mui/material';
+import { MAIN_DOMAIN } from '../services/api';
 
 interface FeaturedQuestionProps {
   question: Question;
@@ -16,7 +16,7 @@ interface FeaturedQuestionProps {
 
 export default function MyQuestion(props: FeaturedQuestionProps) {
   const { question, md = 6 } = props;
-  const imageUrl = question?.photo ? `http://127.0.0.1/media/${question?.photo}` : placeholderImageUrl
+  const imageUrl = question?.photo ? `${MAIN_DOMAIN}/media/${question?.photo}` : placeholderImageUrl
 
   return (
     <Grid item xs={12} md={md} sx={{ mt: 1 }}>
@@ -33,7 +33,7 @@ export default function MyQuestion(props: FeaturedQuestionProps) {
               {question.describe}
             </Typography>
             <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={10}>
-              {question.verify ? 'Опубликован' : 'Рассматривается'}
+              Статус: {question.verify ? 'опубликован' : 'рассматривается'}
             </Typography>
           </CardContent>
           <CardMedia

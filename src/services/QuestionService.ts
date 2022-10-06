@@ -51,8 +51,8 @@ export function QuestionService() {
                     data: data,
                     headers: { "Content-Type": "multipart/form-data" },
                 })
-            }catch(e) {
-                console.log(e)
+            }catch(e: any) {
+                return {data: null, error: e?.response?.data?.error ? e?.response?.data?.error : 'Ошибка при создании'}
             }
         },
         async getMyQuestions() {

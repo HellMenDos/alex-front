@@ -3,10 +3,10 @@ import { StorageService } from "./StorageService";
 import { AuthService } from './AuthService';
 
 export const QUESTIONS_DOMAIN = 'https://62.113.109.57'
-export const MAIN_DOMAIN = 'http://localhost/api'
+export const MAIN_DOMAIN = 'http://localhost'
 
 const api = axios.create({
-    baseURL: MAIN_DOMAIN,
+    baseURL: `${MAIN_DOMAIN}/api/`,
 
 });
 

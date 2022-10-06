@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Question } from '../common/types';
 import { placeholderImageUrl } from '../data';
+import { QUESTIONS_DOMAIN } from '../services/api';
 
 interface FeaturedQuestionProps {
   question: Question;
@@ -15,7 +16,7 @@ interface FeaturedQuestionProps {
 
 export default function FeaturedQuestion(props: FeaturedQuestionProps) {
   const { question, md = 6 } = props;
-  const imageUrl = question?.photo ? `https://itbotinterview.ru${question?.photo}` : placeholderImageUrl
+  const imageUrl = question?.photo ? `${QUESTIONS_DOMAIN}${question?.photo}` : placeholderImageUrl
 
   return (
     <Grid item xs={12} md={md} sx={{ mt: 1 }}>

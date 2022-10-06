@@ -1,12 +1,115 @@
-.MainBoxContainer {
-
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+/* Header styles start */
+.header { 
+    background: #0966aa;
+    border-bottom: 1;
+    border-color: divider; 
+    border-radius: 20px;
+    margin-top:10px;
+    position:sticky;
+    top: 10px;
+    left: 0px;
+    z-index:10;
+    padding: 18px;
+}
+.header_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header_logo_container {
+    display: flex;
+    align-items: center;
+}
+.mainLogo {
+    border-radius: 30px;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+.mainName {
+    font-size: 23px;
+    color:white;
+    text-decoration:none;
+    font-weight: bold
+}
+.header_link {
+    color:white;
+    text-decoration:none;
+    font-weight:lighter;
+    cursor: pointer;
+}
+.ml-10 {
+    margin-left:10px;
+}
+.open_burger {
+    display: none;
 }
 
-.MainBoxContainerText {
-
+.nav_block {
+    display: flex;
 }
-.MainBoxContainerSubText {
+.nav_block_burder {
+    display: none;
+}
+@media (min-width: 900px) {
+    .open_burger {
+        display: none;
+    }
+    .nav_block {
+        display: flex;
+    }
+    .nav_block_burder {
+        display: none;
+    } 
+}
 
+@media (max-width: 900px) {
+    .nav_block {
+        display: none;
+    }
+    .open_burger {
+        display: flex;
+    }
+    .nav_block_burder {
+        display: flex; 
+        justify-content: center; 
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Header styles end */
+
+
+
+
+
+.MainBoxContainer {}
+.MainBoxContainerText {}
+.MainBoxContainerSubText {}
+
+.choocePhoto {
+    display: block;
+    width: 100%;
+    background-color: #0966aa;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .MuiButton-containedPrimary {
