@@ -9,7 +9,7 @@ const theme = createTheme();
 export default function NotFound() {
   return (
     <ThemeProvider theme={theme}>
-        <Typography component="h1" variant="h5" align='center' style={{ marginTop:'30px'}}>
+        <Typography component="h1" variant="h5" align='center' fontWeight='bold' style={{ marginTop:'30px'}}>
             Страница не найдена
         </Typography>
     </ThemeProvider>

@@ -15,8 +15,6 @@ import { fetchUser } from './store/slices/userSlice';
 
 import { StorageService } from './services/StorageService';
 import { useLocation } from 'react-router-dom';
-import Support from './pages/support';
-import NotFound from './pages/404';
 
 function App() {
   const navigate = useNavigate()
@@ -56,7 +54,9 @@ function App() {
   const Questions = lazy(() => import('./pages/questions'));
   const Profile = lazy(() => import('./pages/profile'));
   const Forget = lazy(() => import('./pages/forget'));
-
+  const Contact = lazy(() => import('./pages/contact'));
+  const Support = lazy(() => import('./pages/support'));
+  const NotFound = lazy(() => import('./pages/404'));
 
   return (
     <Suspense fallback={<p></p>}>
@@ -67,6 +67,7 @@ function App() {
             <Route path="forget" element={isAuth ? <Navigate replace to="/profile" /> : <Forget />} />
             <Route path="signup" element={isAuth ? <Navigate replace to="/profile" /> : <Signup />} />
             <Route path="search/" element={<Search />} />
+            <Route path="contact/" element={<Contact />} />
             <Route path="search/:lang" element={<Search />} />
             <Route path="search/:lang/:tech" element={<Search />} />
             <Route path="search/:lang/:tech/:level" element={<Search />} />

@@ -14,6 +14,7 @@ interface MainFeaturedPostProps {
     image: string;
     imageText: string;
     linkText: string;
+    linkURL: string
     title: string;
   };
 }
@@ -93,7 +94,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               className="MainBoxContainerSubText">
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#" sx={{color: "white", textDecoration: "none", fontWeight: "bold", letterSpacing: "4px",}}>
+            <Link variant="subtitle1" href={post.linkURL} sx={{color: "white", textDecoration: "none", fontWeight: "bold", letterSpacing: "4px",}}>
               {post.linkText}
             </Link>
           </Box>

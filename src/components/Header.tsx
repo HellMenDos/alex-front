@@ -89,8 +89,9 @@ function Header() {
       <div  className='header'>
         <div className='header_inner'>
           <div className='header_logo_container'>
-            <img src='/logo.jpeg' className="mainLogo" />
-            <a className="mainName" href='/'>ALEXITINTER</a>
+            <a className="mainName" href='/'>
+              It interview
+            </a>
           </div>   
           <div className='open_burger'>
             <img src='/burger.png' width={30} className="burgerLogo" onClick={openBurger} />
@@ -102,6 +103,9 @@ function Header() {
               </a>
               <a href='/support' className='header_link ml-10'>
                 ПОМОЩЬ
+              </a>
+              <a href='/contact' className='header_link ml-10'>
+                НАШИ КОНТАКТЫ
               </a>
             </div>
 
@@ -121,6 +125,9 @@ function Header() {
               </a>
               <a href='/support' className='header_link'>
                 ПОМОЩЬ
+              </a>
+              <a href='/contact' className='header_link ml-10'>
+                НАШИ КОНТАКТЫ
               </a>
             </div>
 
