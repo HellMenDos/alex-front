@@ -90,7 +90,7 @@ function Header() {
         <div className='header_inner'>
           <div className='header_logo_container'>
             <a className="mainName" href='/'>
-              It interview
+              <img  src='/app.png' height={40}/>
             </a>
           </div>   
           <div className='open_burger'>
@@ -151,7 +151,7 @@ function Header() {
           sx={{ 
             justifyContent:'center',
             overflowX: 'auto',
-            paddingLeft: '0px',
+            paddingLeft: '120px',
             paddingRight: '0px'
           }}
         >

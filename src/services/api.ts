@@ -2,8 +2,8 @@ import axios from "axios";
 import { StorageService } from "./StorageService";
 import { AuthService } from './AuthService';
 
-export const QUESTIONS_DOMAIN = 'https://62.113.109.57'
-export const MAIN_DOMAIN = 'http://localhost'
+export const QUESTIONS_DOMAIN = 'https://itbotinterview.ru'
+export const MAIN_DOMAIN = 'http://45.80.69.79'
 
 const api = axios.create({
     baseURL: `${MAIN_DOMAIN}/api/`,

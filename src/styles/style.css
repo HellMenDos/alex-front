@@ -25,6 +25,10 @@ body {
     z-index:10;
     padding: 18px;
 }
+.css-bqh7lh-MuiToolbar-root {
+    width: 100%;
+    overflow: scroll;
+}
 .header_inner {
     display: flex;
     align-items: center;
@@ -41,12 +45,9 @@ body {
     height: 30px;
 }
 .mainName {
-    font-size: 23px;
-    color:white;
-    text-decoration:none;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .header_link {
     color:white;
