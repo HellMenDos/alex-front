@@ -12,6 +12,7 @@ import { Exit } from '../store/slices/userSlice'
 import { StorageService } from '../services/StorageService';
 
 import { User } from '../common/types';
+import { padding } from '@mui/system';
 
 
 function Header() {
@@ -145,14 +146,13 @@ function Header() {
         animate={control}
         ref={ref}
       >
-        <Toolbar
-          component="nav"
-          variant="dense"
-          sx={{ 
-            justifyContent:'center',
+        <nav
+          style={{ 
             overflowX: 'auto',
-            paddingLeft: '120px',
-            paddingRight: '0px'
+            paddingRight: '0px',
+            margin:5,
+            padding: 10,
+            textAlign: 'center'
           }}
         >
           {sections.map((section) => (
@@ -165,17 +165,20 @@ function Header() {
               sx={{
                 flexShrink: 0,
                 background: activeLink(section.title),
-                borderRadius: '15px',
+                borderRadius: 20,
                 marginLeft: '10px',
                 marginRight: '10px',
                 fontWeight: 'bold', 
-                padding:'8px 15px', 
+                paddingLeft:'20px', 
+                paddingRight:'20px', 
+                paddingTop:'10px', 
+                paddingBottom:'10px',
                 textDecoration:"none"}}
             >
               {section?.title}
             </Link>
           ))}
-        </Toolbar>
+        </nav>
       </motion.div>
     </React.Fragment>
   );

@@ -41,6 +41,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
       variants={boxVariant} 
       animate={control}
       ref={ref}
+      className="mainPostBlock"
     >
     <Paper
       sx={{
@@ -51,8 +52,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${post.image})`,
-        borderRadius:'20px'
+        borderRadius:'20px',
       }}
     >
 

@@ -3,10 +3,11 @@ import { StorageService } from "./StorageService";
 import { AuthService } from './AuthService';
 
 export const QUESTIONS_DOMAIN = 'https://itbotinterview.ru'
-export const MAIN_DOMAIN = 'http://45.80.69.79'
+export const MAIN_DOMAIN = 'https://a-lit.ru/api'
+export const MAIN_DOMAIN_PHOTO = 'https://a-lit.ru'
 
 const api = axios.create({
-    baseURL: `${MAIN_DOMAIN}/api/`,
+    baseURL: `${MAIN_DOMAIN}/`,
 
 });
 

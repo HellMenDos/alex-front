@@ -50,6 +50,12 @@ export default function Signup() {
       setSnackError(true)
       return;
     }
+
+    if((data.get('password') as string).length < 6) {
+      setMessage("Пароль должен быть больше 6 символов")
+      setSnackError(true)
+      return;
+    }
     
     if(String(data.get('password')).length < 6) {
       setMessage("Пароли должен быть больше 6 символов")

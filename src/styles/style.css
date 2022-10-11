@@ -95,8 +95,12 @@ body {
     }
 }
 /* Header styles end */
-
-
+.mainPostBlock > div {
+    background-image: linear-gradient(to top, rgb(0 0 0 / 45%), rgb(50 50 50 / 30%)), url(/public/code.jpeg);
+}
+label {
+    cursor: pointer;
+}
 
 
 

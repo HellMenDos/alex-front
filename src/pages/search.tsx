@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { Pagination } from '@mui/material';
 
 import FeaturedQuestion from '../components/FeaturedQuestion';
@@ -19,6 +20,7 @@ export default function Search() {
   const TOTAL_POST_PER_PAGE = 10
   const TOTAL_POSTS = TOTAL_POST_PER_PAGE * Number(searchParams.get('page'))
   const [search, setSearch] = useState<string>('')
+  const [empty, setEmpty] = useState<boolean>(false)
   const params = useParams()
   const dispatch = useAppDispatch()
   const questions = useAppSelector((state) => state.question.questions)
@@ -40,6 +42,8 @@ export default function Search() {
         lang: params.lang ? params.lang : ''
       }))
     }
+
+
   }, [params])
 
   const filterPosts = (post: Question) => post.title.includes(search as string) || post.describe.includes(search as string)
@@ -50,14 +54,18 @@ export default function Search() {
 
   return (
         <DocumentMeta {...meta}>
-          <Input value={search} onChange={({ target }) => setSearch(target.value)} style={{ width:"100%", marginTop: '10px' }} placeholder='Поиск' />
-          <Grid container spacing={4} style={{ marginTop:'1px' }}>
+          <Input value={search} onChange={({ target }) => setSearch(target.value)} style={{ width:"100%", marginTop: '10px',display:'block' }} placeholder='Поиск' />
+          <Grid container spacing={4} style={{ marginTop:'1px',alignItems:'center' }}>
             {questions
             .filter((post) => filterPosts(post))
             .slice(TOTAL_POSTS, TOTAL_POSTS + 10)
-            .map((post) => (
-              <FeaturedQuestion key={post.id} question={post} />
-            ))}
+            .map((post) => (<FeaturedQuestion key={post.id} question={post} />))}
+
+            {questions.length == 0 && (
+              <Typography component="h1" variant="h5" align='center' fontWeight='bold' style={{ marginTop:'30px',width:"100%",display:'block'}}>
+                Вопросов няма ;D
+              </Typography>
+            )}
           </Grid>
           <div style={{width: "max-content", margin: "30px auto"}}> 
             <Pagination 
