@@ -30,7 +30,7 @@ export default function Sidebar(props: SidebarProps) {
           Наши площадки
         </Typography>
         {archives.map((archive) => (
-          <Link display="block" variant="body1" fontWeight='lighter' href={archive.url} key={archive.title}>
+          <Link display="block" style={{ textDecoration:'none' }} variant="body1" fontWeight='lighter' href={archive.url} key={archive.title}>
             {archive.title}
           </Link>
         ))}

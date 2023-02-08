@@ -118,7 +118,7 @@ export default function Signup() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 1, mb: 1, borderRadius:'10px', background:"#0966aa" }}
+              sx={{ mt: 1, mb: 1, borderRadius:'10px', background:"#292e3c" }}
             >
             Зарегистрироваться
             </Button>

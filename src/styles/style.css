@@ -11,10 +11,18 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-  
+
+  hr {
+    margin: 20px 0;
+	padding: 0;
+	height: 3px;
+    border-radius: 3px;
+	border: none;
+	background: linear-gradient(45deg, #1876d2, #292e3c);
+  }
 /* Header styles start */
 .header { 
-    background: #0966aa;
+    background: #292e3c;
     border-bottom: 1;
     border-color: divider; 
     border-radius: 20px;
@@ -44,6 +52,7 @@ body {
     width: 30px;
     height: 30px;
 }
+
 .mainName {
     display: flex;
     align-items: center;
@@ -54,6 +63,7 @@ body {
     text-decoration:none;
     font-weight:lighter;
     cursor: pointer;
+    text-transform: uppercase;
 }
 .ml-10 {
     margin-left:10px;
@@ -96,7 +106,7 @@ body {
 }
 /* Header styles end */
 .mainPostBlock > div {
-    background-image: linear-gradient(to top, rgb(0 0 0 / 45%), rgb(50 50 50 / 30%)), url(/public/code.jpeg);
+    background-image: linear-gradient(to top, rgb(0 0 0 / 45%), rgb(50 50 50 / 30%)), url(/public/code.jpg);
 }
 label {
     cursor: pointer;
@@ -111,7 +121,7 @@ label {
 .choocePhoto {
     display: block;
     width: 100%;
-    background-color: #0966aa;
+    background-color: #292e3c;
     color: white;
     font-weight: bold;
     padding: 10px;
@@ -130,6 +140,12 @@ label {
     }
     .MainBoxContainerSubText {
         font-size: 15px !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .css-c49kz {
+        flex-wrap: wrap;
     }
 }
  

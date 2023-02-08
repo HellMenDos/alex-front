@@ -40,11 +40,11 @@ const StyledInputElement = styled('input')(
   box-shadow: 0px 4px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
 
   &:hover {
-    border-color: ${blue[400]};
+    border-color: #292e3c;
   }
 
   &:focus {
-    border-color: ${blue[400]};
+    border-color: #292e3c;
     outline: 3px solid ${theme.palette.mode === 'dark' ? blue[500] : blue[200]};
   }
 `,

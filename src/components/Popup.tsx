@@ -72,7 +72,7 @@ function CreateDialog(props: CreateDialogProps) {
               variant="contained"
               sx={{ 
                 borderRadius:'10px', 
-                background:"#0966aa", 
+                background:"#292e3c", 
                 marginLeft:"15px",
                 marginTop:"10px" 
               }}
@@ -114,7 +114,7 @@ export default function CreateDialogPop() {
       <Button 
         variant="contained"  
         fullWidth 
-        sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}
+        sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#292e3c" }}
         onClick={handleClickOpen}>
         Создать вопрос
       </Button>

@@ -87,7 +87,7 @@ export default function Signin() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}
+              sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#292e3c" }}
             >
               Войти
             </Button>

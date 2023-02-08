@@ -53,10 +53,9 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         borderRadius:'20px',
+        width:'100%'
       }}
     >
-
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <Box
         sx={{
           position: 'absolute',
@@ -65,18 +64,23 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
           right: 0,
           left: 0,
           backgroundColor: 'rgba(0,0,0,.3)',
-          borderRadius:'20px'
+          borderRadius:'20px',
+          width:'100%'
         }}
       />
       <Grid container>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <Box
             sx={{
               position: 'relative',
-              p: { xs: 3, md: 6 },
-              pr: { md: 0 },
-            }}
+              p: { xs: 3, md: 12,  },
+              pr: { md: 0, },
+              display:'flex',
+              width:'100%',
+              justifyContent:'space-between',
+            }}            
           >
+            <div style={{ width: '100%'}}>
             <Typography 
               component="h1" 
               variant="h3" 
@@ -86,6 +90,8 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               className="MainBoxContainerText">
               {post.title}
             </Typography>
+            </div>
+            <div style={{ width: '100%', marginTop: '15px'}}>
             <Typography 
               variant="h5" 
               color="inherit" 
@@ -94,9 +100,10 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               className="MainBoxContainerSubText">
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href={post.linkURL} sx={{color: "white", textDecoration: "none", fontWeight: "bold", letterSpacing: "4px",}}>
+            <Link variant="subtitle1" href={post.linkURL} style={{ color: "#292e3c",background: 'white', padding: '10px 20px', borderRadius: '15px',textDecoration: "none"}}>
               {post.linkText}
             </Link>
+            </div>
           </Box>
         </Grid>
       </Grid>

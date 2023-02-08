@@ -39,7 +39,7 @@ function CommentForm({ id }: { id: string }) {
   return (
     <form onSubmit={onSubmit}>
       <Input style={{ width:"100%", marginTop: '20px' }} placeholder="Комментарий" value={comment} onChange={({ target }) => setCommet(target.value)} />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa" }}>
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#292e3c" }}>
         Оставить комментарий
       </Button>
     </form>
@@ -88,7 +88,7 @@ export default function Main({ question,isMain = false }: MainProps) {
   }
 
   const isUserLikes = comments.favourites.find(({ user }) => user?.id == userData?.id)
-  const questionPhoto = question.photo?.split('8080')[1] ? `https://itbotinterview.ru${question.photo?.split('8080')[1]}` : ''
+  const questionPhoto = question.photo?.split('itbotinterview.ru')[1] ? `https://itbotinterview.ru${question.photo?.split('itbotinterview.ru')[1]}` : ''
   const likeText = !userData?.id ? 'Чтобы поставить отметку авторизуйся' : 'Нравится'
 
   return (
@@ -108,7 +108,7 @@ export default function Main({ question,isMain = false }: MainProps) {
         {question.describe}
       </Markdown>
       {isMain && (
-        <Button type="submit" href={`/questions/${question?.id}`} fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#0966aa"}}>
+        <Button type="submit" href={`/questions/${question?.id}`} fullWidth variant="contained" sx={{ mt: 3, mb: 2, borderRadius:'10px', background:"#292e3c"}}>
           Перейти к вопросу
         </Button>)
       }

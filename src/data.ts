@@ -15,7 +15,7 @@ export const mainFeaturedPost = {
   description: "Не бойся проходить собеседования. Тут ты можешь найти все нужные вопросы на собеседования",
   image: '/code.jpeg',
   imageText: 'main image description',
-  linkText: 'Наши ресурсы...',
+  linkText: ' Наши ресурсы',
   linkURL: '/contact',
 
 };
