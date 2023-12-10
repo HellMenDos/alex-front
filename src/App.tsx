@@ -12,9 +12,11 @@ import { useAppDispatch } from './store/hooks';
 import { fetchAllTechs } from './store/slices/techSlice';
 import { fetchAllLevels } from './store/slices/levelSlice';
 import { fetchUser } from './store/slices/userSlice';
-
 import { StorageService } from './services/StorageService';
 import { useLocation } from 'react-router-dom';
+
+import Home from './pages/home'
+import NotFound from './pages/404'
 
 function App() {
   const navigate = useNavigate()
@@ -47,33 +49,27 @@ function App() {
     }
   })
 
-  const Home = lazy(() => import('./pages/home'));
-  const Signin = lazy(() => import('./pages/signin'));
-  const Signup = lazy(() => import('./pages/signup'));
+
   const Search = lazy(() => import('./pages/search'));
   const Questions = lazy(() => import('./pages/questions'));
-  const Profile = lazy(() => import('./pages/profile'));
-  const Forget = lazy(() => import('./pages/forget'));
   const Contact = lazy(() => import('./pages/contact'));
-  const Support = lazy(() => import('./pages/support'));
-  const NotFound = lazy(() => import('./pages/404'));
 
   return (
     <Suspense fallback={<p></p>}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="signin" element={isAuth ? <Navigate replace to="/profile" /> : <Signin />} />
+            {/* <Route path="signin" element={isAuth ? <Navigate replace to="/profile" /> : <Signin />} />
             <Route path="forget" element={isAuth ? <Navigate replace to="/profile" /> : <Forget />} />
-            <Route path="signup" element={isAuth ? <Navigate replace to="/profile" /> : <Signup />} />
+            <Route path="signup" element={isAuth ? <Navigate replace to="/profile" /> : <Signup />} /> */}
             <Route path="search/" element={<Search />} />
             <Route path="contact/" element={<Contact />} />
             <Route path="search/:lang" element={<Search />} />
             <Route path="search/:lang/:tech" element={<Search />} />
             <Route path="search/:lang/:tech/:level" element={<Search />} />
             <Route path="questions/:id" element={<Questions />} />
-            <Route path="support" element={<Support />} />
-            <Route path="profile" element={!isAuth ? <Navigate replace to="/signin" /> : <Profile />} />
+            {/* <Route path="support" element={<Support />} /> */}
+            {/* <Route path="profile" element={!isAuth ? <Navigate replace to="/signin" /> : <Profile />} /> */}
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>

@@ -102,21 +102,21 @@ function Header() {
               <a href='https://t.me/interviewITBot' className='header_link ml-10'>
                 IT BOT
               </a>
-              <a href='/support' className='header_link ml-10'>
+              <a href='https://t.me/HelloMeanOfficial' className='header_link ml-10'>
                 ПОМОЩЬ
               </a>
               <a href='/contact' className='header_link ml-10'>
                 НАШИ КОНТАКТЫ
               </a>
             </div>
-
+{/* 
             <div style={{ display: 'flex' }}>
               {user?.id ? 
               <a href='/profile' className='header_link ml-10'>Профиль</a> :
               <a href='/signin' className='header_link ml-10'>Войти</a>}
               
               {user?.id && <a onClick={exit} className='header_link  ml-10'>Выйти</a>}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='nav_block_burder' style={{ display: burger ? 'flex' : 'none' }}>
@@ -124,7 +124,7 @@ function Header() {
               <a href='https://t.me/interviewITBot' className='header_link '>
                 IT BOT
               </a>
-              <a href='/support' className='header_link'>
+              <a href='https://t.me/HelloMeanOfficial' className='header_link'>
                 ПОМОЩЬ
               </a>
               <a href='/contact' className='header_link ml-10'>
@@ -132,13 +132,13 @@ function Header() {
               </a>
             </div>
 
-            <div style={{ display: 'flex', flexDirection:'column' }}>
+            {/* <div style={{ display: 'flex', flexDirection:'column' }}>
               {user?.id ? 
               <a href='/profile' className='header_link'>Профиль</a> :
               <a href='/signin' className='header_link'>Войти</a>}
               
               {user?.id && <a onClick={exit} className='header_link  ml-10'>Выйти</a>}
-            </div>
+            </div> */}
           </div>
       </div>
       <motion.div 

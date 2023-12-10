@@ -11,7 +11,7 @@ import { mainFeaturedPost, sidebar } from '../data';
 import DocumentMeta from 'react-document-meta';
 
 
-export default function Blog() {
+export default function Home() {
   const [firstPost, setFirstPost] = useState<Question | undefined>()
   const [secondPost, setSecondPost] = useState<Question | undefined>()
   const [mainPost, setMainPost] = useState<Question | undefined>()
