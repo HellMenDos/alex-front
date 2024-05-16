@@ -6,7 +6,10 @@ export const sidebar = {
       { title: 'Джаваскриптезеры', url: 'https://t.me/jswrl' },
       { title: 'Джаваскриптезеры YouTube', url: 'https://www.youtube.com/channel/UCPHIf4eGH-i5yox4MqI-fvw' },
       { title: 'Питонисты', url: 'https://t.me/ptworl' },
-      { title: 'Связаться с нами', url: '/support' },
+      { title: 'Питонисты YouTube', url: 'https://www.youtube.com/@ptworl' },
+      { title: 'MIXER', url: 'https://t.me/+DWDnUTDOH71iYjcy' },
+      { title: 'MIXER YouTube', url: 'https://www.youtube.com/@mixer_it' },
+      { title: 'Связаться с нами', url: 'https://t.me/HelloMeanOfficial' },
     ],
 };
 
