@@ -21,7 +21,7 @@ export default function FeaturedQuestion(props: FeaturedQuestionProps) {
   return (
     <Grid item xs={12} md={md} sx={{ mt: 1 }}>
       <CardActionArea component="a" href={`/questions/${question.id}`}>
-        <Card sx={{ display: 'flex', borderRadius:'20px' }}>
+        <Card className='cardblock' sx={{ display: 'flex', borderRadius:'20px' }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5" fontWeight="bold" className="MainBoxContainerText">
               {question.title}

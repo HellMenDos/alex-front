@@ -99,14 +99,14 @@ function Header() {
           </div>
           <div className='nav_block'>
             <div style={{ display: 'flex' }}>
-              <a href='https://t.me/interviewITBot' className='header_link ml-10'>
-                IT BOT
+              <a href='https://t.me/interviewITBot' className='header_link ml-15'>
+                IT БОТ
               </a>
-              <a href='https://t.me/HelloMeanOfficial' className='header_link ml-10'>
-                ПОМОЩЬ
+              <a href='https://t.me/HelloMeanOfficial' className='header_link ml-15'>
+                ПОМОЩЬ/СОБЕСЕДОВАНИЕ
               </a>
-              <a href='/contact' className='header_link ml-10'>
-                НАШИ КОНТАКТЫ
+              <a href='/contact' className='header_link ml-15'>
+                КОНТАКТЫ
               </a>
             </div>
 {/* 
@@ -122,13 +122,13 @@ function Header() {
         <div className='nav_block_burder' style={{ display: burger ? 'flex' : 'none' }}>
             <div style={{ display: 'flex',flexDirection:'column', alignItems:'center' }}>
               <a href='https://t.me/interviewITBot' className='header_link '>
-                IT BOT
+                IT БОТ
               </a>
               <a href='https://t.me/HelloMeanOfficial' className='header_link'>
-                ПОМОЩЬ
+                ПОМОЩЬ/СОБЕСЕДОВАНИЕ
               </a>
-              <a href='/contact' className='header_link ml-10'>
-                НАШИ КОНТАКТЫ
+              <a href='/contact' className='header_link'>
+                КОНТАКТЫ
               </a>
             </div>
 
@@ -162,8 +162,10 @@ function Header() {
               key={section.id}
               variant="body2"
               href={makeHref(section.title)}
+              className='navlink'
               sx={{
                 flexShrink: 0,
+                transition: 0.3,
                 background: activeLink(section.title),
                 borderRadius: 20,
                 marginLeft: '10px',

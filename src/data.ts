@@ -1,6 +1,6 @@
 export const sidebar = {
     title: 'Что тут есть ?',
-    description: 'Тут ты можешь найти большое количество вопросов на совсем разные технологии. \nТы можешь подготовиться к собеседованию и пройти импровезированное в боте собеседнике',
+    description: 'Тут ты можешь найти большое количество вопросов на совсем разные технологии. \nТы можешь подготовиться к собеседованию и пройти импровезированное в боте собеседнике, а так же ты можешь записаться на реальное собеседование у создателя',
     archives: [
       { title: 'Бот IT собеседник', url: 'https://t.me/interviewITBot' },
       { title: 'Джаваскриптезеры', url: 'https://t.me/jswrl' },
@@ -9,13 +9,14 @@ export const sidebar = {
       { title: 'Питонисты YouTube', url: 'https://www.youtube.com/@ptworl' },
       { title: 'MIXER', url: 'https://t.me/+DWDnUTDOH71iYjcy' },
       { title: 'MIXER YouTube', url: 'https://www.youtube.com/@mixer_it' },
-      { title: 'Связаться с нами', url: 'https://t.me/HelloMeanOfficial' },
+      { title: 'Вместе с ITSystem', url: 'https://www.itsystem.space/' },
+      { title: 'Связаться', url: 'https://t.me/HelloMeanOfficial' },
     ],
 };
 
 export const mainFeaturedPost = {
   title: 'Ищи вопросы на собеседования быстро',
-  description: "Не бойся проходить собеседования. Тут ты можешь найти все нужные вопросы на собеседования",
+  description: "Не бойся проходить собеседования. Тут ты можешь найти все нужные вопросы для собеседования, а так же ты можешь пройти просто напиши мне (создателю)",
   image: '/code.jpeg',
   imageText: 'main image description',
   linkText: ' Наши ресурсы',

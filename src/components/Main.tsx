@@ -92,7 +92,7 @@ export default function Main({ question,isMain = false }: MainProps) {
   // const likeText = !userData?.id ? 'Чтобы поставить отметку авторизуйся' : 'Нравится'
 
   return (
-    <Grid item xs={12}md={8} sx={{ '& .markdown': { py: 3, }}}>
+    <Grid  item xs={12}md={8} sx={{ '& .markdown': { py: 3, }}}>
       <Typography variant="h6" gutterBottom fontWeight='bold'>
         {question.title}
       </Typography>

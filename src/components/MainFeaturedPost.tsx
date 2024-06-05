@@ -100,7 +100,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               className="MainBoxContainerSubText">
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href={post.linkURL} style={{ color: "#292e3c",background: 'white', padding: '10px 20px', borderRadius: '15px',textDecoration: "none"}}>
+            <Link variant="subtitle1" href={post.linkURL} style={{ color: "#292e3c",background: 'white', padding: '15px 30px',fontSize:'20px', borderRadius: '10px',textDecoration: "none"}}>
               {post.linkText}
             </Link>
             </div>

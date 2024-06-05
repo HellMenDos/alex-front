@@ -17,7 +17,7 @@ export default function Contact() {
                     Email
                 </Typography>
                 <Typography fontWeight={'lighter'}>
-                    <a href='mailto:itinterview@mail.ru'>alit@a-lit.ru</a>
+                    <a href='mailto:itinterview@mail.ru'>poznkirill3@gmail.com</a>
                 </Typography>
             </Paper>
             <Sidebar
