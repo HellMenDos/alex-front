@@ -27,7 +27,15 @@ export default function FeaturedQuestion(props: FeaturedQuestionProps) {
               {question.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" fontSize={13}>
-              {`${question.lang.title} ${question.level.title} ${question.tech.title}`}
+              <span className='back-black'>
+                {question.lang.title}
+              </span>
+              <span className='back-black'>
+                {question.level.title}
+              </span>
+              <span className='back-black'>
+                {question.tech.title}
+              </span>
             </Typography>
             <Typography variant="subtitle1" paragraph fontWeight="light" fontSize={15} className="MainBoxContainerSubText">
               {question.describe.slice(0,150)}...

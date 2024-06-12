@@ -96,6 +96,11 @@ export default function Main({ question,isMain = false }: MainProps) {
       <Typography variant="h6" gutterBottom fontWeight='bold'>
         {question.title}
       </Typography>
+      <div className='about' style={{ marginBottom: '10px' }}>
+        <span className='back-black'>{question.lang.title}</span>
+        <span className='back-black'>{question.level.title}</span>
+        <span className='back-black'>{question.tech.title}</span>
+      </div>
       {/* <div style={{ fontWeight:'lighter' }}>Нравится: {comments.favourites.length} пользователям</div> */}
       <Divider />
       {/* { !isMain && (isUserLikes?.id ? 

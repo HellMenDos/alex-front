@@ -20,18 +20,43 @@ body {
 	border: none;
 	background: linear-gradient(45deg, #1876d2, #292e3c);
   }
+.back-black {
+    background: #292e3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.ads {
+    background: #292e3c;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ads_main_title {
+    font-weight: bold;
+}
+.textBlock {
+    margin-right: 20px;
+}
 /* Header styles start */
 .header { 
     background: #292e3c;
     border-bottom: 1;
     border-color: divider; 
-    border-radius: 20px;
-    margin-top:10px;
     position:sticky;
-    top: 10px;
+    top: 0px;
     left: 0px;
     z-index:10;
     padding: 18px;
+}
+.header_container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 .css-bqh7lh-MuiToolbar-root {
     width: 100%;

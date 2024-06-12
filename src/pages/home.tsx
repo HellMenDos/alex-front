@@ -9,6 +9,7 @@ import { Mode, QuestionService } from '../services/QuestionService';
 import { Question } from '../common/types';
 import { mainFeaturedPost, sidebar } from '../data';
 import DocumentMeta from 'react-document-meta';
+import Link from '@mui/material/Link';
 
 
 export default function Home() {
@@ -34,6 +35,17 @@ export default function Home() {
   return (
         <DocumentMeta {...meta}>
           <MainFeaturedPost post={mainFeaturedPost} />
+          <div className='ads'>
+            <div className='textBlock'>
+              <div className='ads_main_title'>Нужна помощь или собеседование ?</div>
+              <div>Напиши мне и мы решим твою проблему</div>
+            </div>
+            <div className='buttonBlock'>
+              <Link variant="subtitle1" href={'https://t.me/HelloMeanOfficial'} style={{ color: "#292e3c",background: 'white', padding: '15px 30px',fontSize:'20px', borderRadius: '10px',textDecoration: "none"}}>
+                Напиши
+              </Link>
+            </div>
+          </div>
           <Grid container spacing={4}>
             {firstPost && <FeaturedPost key={firstPost.title} question={firstPost} />}
             {secondPost && <FeaturedPost key={secondPost.title} question={secondPost} />}

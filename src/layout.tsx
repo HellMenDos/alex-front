@@ -14,8 +14,8 @@ function Layout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Header />
       <Container maxWidth="lg">
-          <Header />
           <Outlet />
       </Container>
     </ThemeProvider>

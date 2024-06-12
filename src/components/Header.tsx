@@ -88,6 +88,7 @@ function Header() {
   return (
     <React.Fragment>
       <div  className='header'>
+        <div className='header_container'>
         <div className='header_inner'>
           <div className='header_logo_container'>
             <a className="mainName" href='/'>
@@ -139,7 +140,8 @@ function Header() {
               
               {user?.id && <a onClick={exit} className='header_link  ml-10'>Выйти</a>}
             </div> */}
-          </div>
+        </div>
+        </div>
       </div>
       <motion.div 
         variants={boxVariant} 
@@ -152,7 +154,8 @@ function Header() {
             paddingRight: '0px',
             margin:5,
             padding: 10,
-            textAlign: 'center'
+            textAlign: 'center',
+            
           }}
         >
           {sections.map((section) => (
