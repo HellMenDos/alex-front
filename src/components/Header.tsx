@@ -72,11 +72,12 @@ function Header() {
   
   const makeHref = (title: string) => {
     let limitCount = Object.values(params).length == 3 ? `${title}` : `${locate.pathname}/${title}`
+    
     if (
       !!params.tech && 
       !!params.lang && 
-      !limitCount.includes(params.tech) && 
-      !limitCount.includes(params.lang)) {
+      !limitCount.replace(/ g/, '%20').includes(params.tech.replace(/ /g, '%20')) && 
+      !limitCount.replace(/ g/, '%20').includes(params.lang.replace(/ /g, '%20'))) {
         limitCount = `/search/${params.lang}/${params.tech}/${limitCount}`
       }
     return params.lang || params.tech ? limitCount : `/search/${title}`
