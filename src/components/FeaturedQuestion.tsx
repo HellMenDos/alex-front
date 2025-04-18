@@ -26,14 +26,14 @@ export default function FeaturedQuestion(props: FeaturedQuestionProps) {
             <Typography component="h2" variant="h5" fontWeight="bold" className="MainBoxContainerText">
               {question.title}
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary" fontSize={13}>
-              <span className='back-black'>
+            <Typography variant="subtitle1" sx={{ display: 'flex', flexWrap: 'wrap'}} color="text.secondary" fontSize={13}>
+              <span className='back-black' style={{ marginTop: '5px' }}>
                 {question.lang.title}
               </span>
-              <span className='back-black'>
+              <span className='back-black' style={{ marginTop: '5px' }}>
                 {question.level.title}
               </span>
-              <span className='back-black'>
+              <span className='back-black' style={{ marginTop: '5px' }}>
                 {question.tech.title}
               </span>
             </Typography>
