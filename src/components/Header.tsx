@@ -75,8 +75,8 @@ function Header() {
     if (
       !!params.tech && 
       !!params.lang && 
-      !limitCount.includes(params.tech) && 
-      !limitCount.includes(params.lang)) {
+      !limitCount.includes(params.tech.replace(/ /g,'%20')) && 
+      !limitCount.includes(params.lang.replace(/ /g,'%20'))) {
         limitCount = `/search/${params.lang}/${params.tech}/${limitCount}`
       }
     return params.lang || params.tech ? limitCount : `/search/${title}`
