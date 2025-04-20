@@ -88,7 +88,7 @@ export default function Main({ question,isMain = false }: MainProps) {
   }
 
   const isUserLikes = comments.favourites.find(({ user }) => user?.id == userData?.id)
-  const questionPhoto = question.photo?.split('itbotinterview.ru')[1] ? `https://itbotinterview.ru${question.photo?.split('itbotinterview.ru')[1]}` : ''
+  const questionPhoto = question.photo?.split('itbotint.ru')[1] ? `https://itbotint.ru${question.photo?.split('itbotint.ru')[1]}` : ''
   // const likeText = !userData?.id ? 'Чтобы поставить отметку авторизуйся' : 'Нравится'
 
   return (
